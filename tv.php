@@ -38,7 +38,7 @@
   <!-- Button trigger modal -->
   <div style="text-align: center;">
 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
-  Add Laptop
+  Add TV
 </button>
 </div>
 
@@ -60,12 +60,9 @@
   </div>
   <select class="custom-select" id="inputGroupSelect01" name="brand">
     <option selected>Choose...</option>
-    <option value="Apple">Apple</option>
-    <option value="Assus">Assus</option>
-    <option value="Accer">Accer</option>
-    <option value="Hp">Hp</option>
-    <option value="Dell">Dell</option>
-    <option value="Lenevo">Lenevo</option>
+    <option value="Sony">Sony</option>
+    <option value="Samsung">Samsung</option>
+    <option value="Lg">Lg</option>
   </select>
 </div>
       <div class="input-group mb-3">
@@ -92,7 +89,7 @@
   </div>
   <input type="text" name="price" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" required>
 </div>
-    <img src="" id="image" style="display:none;" height="150" width="100">
+ <img src="" id="image" style="display:none;" height="150" width="100">
     <label>Insert Your Image</label>
     <input name="img" onchange="showImage.call(this)" type="file" required>
 <div style="text-align: center;">
@@ -118,13 +115,14 @@
         list($width, $height) = getimagesize( $filename);       
         move_uploaded_file($filename,  $destFile);
    
-            $sql = "INSERT INTO laptop(brand,name,des,stock,price,img_name)
+            $sql = "INSERT INTO tv(brand,name,des,stock,price,img_name)
                                 VALUES('$brand','$name','$des','$stock','$price','$uniquesavename')";
+
          
 
                 $res = mysqli_query($conn,$sql);              
                 echo"<script>swal({
-                    title: 'Laptop Added Successfully',
+                    title: 'TV Added Successfully',
                     text: 'Thank You',
                     icon: 'success',
                     timer: 3000,
@@ -146,7 +144,7 @@
 <h3>Edit</h3>
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1">
-  Apple
+  Sony
 </button>
 
 <!-- Modal -->
@@ -154,7 +152,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Apple</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Sony</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -171,7 +169,7 @@
      <?php
       include_once("connection.php");
       $count = 0;
-      $rom="SELECT * FROM laptop WHERE brand='Apple'";
+      $rom="SELECT * FROM tv WHERE brand='Sony'";
       $rim = mysqli_query($conn,$rom);
       
       while ($res = mysqli_fetch_array($rim)) {
@@ -202,7 +200,7 @@
 </div>
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2">
-  Assus
+  Samsung
 </button>
 
 <!-- Modal -->
@@ -210,7 +208,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Assus</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Samsung</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -227,7 +225,7 @@
      <?php
       include_once("connection.php");
       $count = 0;
-      $rom="SELECT * FROM laptop WHERE brand='Assus'";
+      $rom="SELECT * FROM tv WHERE brand='Samsung'";
       $rim = mysqli_query($conn,$rom);
      
       while ($res = mysqli_fetch_array($rim)) {
@@ -260,7 +258,7 @@
 </div>
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal3">
-  Accer
+  Lg
 </button>
 
 <!-- Modal -->
@@ -268,7 +266,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Accer</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Lg</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -285,7 +283,7 @@
      <?php
       include_once("connection.php");
       $count = 0;
-      $rom="SELECT * FROM laptop WHERE brand='Accer'";
+      $rom="SELECT * FROM tv WHERE brand='Lg'";
       $rim = mysqli_query($conn,$rom);
       
       while ($res = mysqli_fetch_array($rim)) {
@@ -315,183 +313,12 @@
     </div>
   </div>
 </div>
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal4">
-  Hp
-</button>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Hp</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <table class="table table-hover">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Name</th>
-      <th scope="col">Action</th>
-    </tr>
-  </thead>
-     <?php
-      include_once("connection.php");
-      $count = 0;
-      $rom="SELECT * FROM laptop WHERE brand='Hp'";
-      $rim = mysqli_query($conn,$rom);
-      
-      while ($res = mysqli_fetch_array($rim)) {
-      $count++;
-      ?>
-     
-  
-  
-    <tr>
-      <th scope="row"><?php echo $count; ?></th>
-      <td><?php echo $res['name']; ?></td>
-      <td><a href="">Edit</a></td>
-    </tr>
-  
-      <?php
-        
-      }
-     
-    ?>
-</tbody>
-</table>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal5">
-  Dell
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal5" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Dell</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-       <table class="table table-hover">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Name</th>
-      <th scope="col">Action</th>
-    </tr>
-  </thead>
-     <?php
-      include_once("connection.php");
-      $count = 0;
-      $rom="SELECT * FROM laptop WHERE brand='Dell'";
-      $rim = mysqli_query($conn,$rom);
-      
-      while ($res = mysqli_fetch_array($rim)) {
-      $count++;
-      ?>
-     
-  
-  
-    <tr>
-      <th scope="row"><?php echo $count; ?></th>
-      <td><?php echo $res['name']; ?></td>
-      <td><a href="">Edit</a></td>
-    </tr>
-  
-      <?php
-        
-      }
-     
-    ?>
-</tbody>
-</table>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal6">
-  Lenevo
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal6" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Lenevo</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      <table class="table table-hover">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Name</th>
-      <th scope="col">Action</th>
-    </tr>
-  </thead>
-     <?php
-      include_once("connection.php");
-      $count = 0;
-      $rom="SELECT * FROM laptop WHERE brand='Lenevo'";
-      $rim = mysqli_query($conn,$rom);
-      
-      while ($res = mysqli_fetch_array($rim)) {
-      $count++;
-      ?>
-     
-  
-  
-    <tr>
-      <th scope="row"><?php echo $count; ?></th>
-      <td><?php echo $res['name']; ?></td>
-      <td><a href="">Edit</a></td>
-    </tr>
-  
-      <?php
-        
-      }
-     
-    ?>
-</tbody>
-</table>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
 <br>
 <hr>
 <a href="admindash.php" style="text-align: center; font-size: 25px; font-weight: bolder;">Back To Home</a>
 </div>
-
-   <script type="text/javascript">
+ <script type="text/javascript">
     
     function showImage(){
         if(this.files && this.files[0]){
@@ -507,5 +334,6 @@
     }
     
     </script>
+</body>
 </body>
 </html>

@@ -44,13 +44,13 @@
   <div class="card">
     <img class="card-img-top pt-3" src="image/phone.png" alt="Card image cap" height="200" style="width: 150px; margin:0 auto;">
     <div class="card-body">
-      <h3 style="text-align: center;"><a href="">Phone </a></h3>
+      <h3 style="text-align: center;"><a href="phone.php">Phone </a></h3>
     </div>
   </div>
  <div class="card">
     <img class="card-img-top pt-3" src="image/tab.png" alt="Card image cap" height="200" style="width: 150px; margin:0 auto;">
     <div class="card-body">
-      <h3 style="text-align: center;"><a href="">Tab </a></h3>
+      <h3 style="text-align: center;"><a href="tab.php">Tab </a></h3>
     </div>
   </div>
 </div>
@@ -59,13 +59,13 @@
   <div class="card">
     <img class="card-img-top pt-3" src="image/tv.png" alt="Card image cap" height="200">
     <div class="card-body">
-      <h3 style="text-align: center;"><a href="">TV </a></h3>
+      <h3 style="text-align: center;"><a href="tv.php">TV </a></h3>
     </div>
   </div>
   <div class="card">
     <img class="card-img-top pt-3" src="image/game.png" alt="Card image cap" height="200" style="width: 150px; margin:0 auto;">
     <div class="card-body">
-      <h3 style="text-align: center;"><a href="">Game </a></h3>
+      <h3 style="text-align: center;"><a href="game.php">Game </a></h3>
     </div>
   </div>
  <div class="card">

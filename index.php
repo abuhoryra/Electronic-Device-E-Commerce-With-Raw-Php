@@ -81,7 +81,7 @@
   </button>
   <div class="dropdown-menu bg-info">
         <a href="#" class="list-group-item list-group-item-action bg-info" >Xbox</a>
-        <a href="#" class="list-group-item list-group-item-action bg-info">Playstration</a>
+        <a href="#" class="list-group-item list-group-item-action bg-info">PS4</a>
   </div>
 </div>
       </div>
