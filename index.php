@@ -131,11 +131,12 @@
     
        ?>
          <div class="col-lg-3 col-md-6 col-12">
+          <br>
        <div class="card" style="">
-      <img class="card-img-top" style="height: 250px;" src="">
+      <img class="card-img-top" style="height: 250px;" src="item/<?php echo $res['img_name'] ?>">
       <div class="card-body">
 
-        <p><?php echo $res['name']; ?></p>
+        <p><?php echo $res['name']; ?><a style="float: right;" href="">View More</a></p> 
       
 
 </div>
