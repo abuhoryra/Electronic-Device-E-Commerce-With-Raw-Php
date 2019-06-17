@@ -16,13 +16,14 @@
     session_start();
    
     
-    
+      
     $username = $_SESSION['user_name'];
+    $usertype = $_SESSION['user_type'];
 
 
  
     
-    if($username == true){
+    if($username == true && $usertype == true){
         
     }
     
@@ -183,7 +184,7 @@
     <tr>
       <th scope="row"><?php echo $count; ?></th>
       <td><?php echo $res['name']; ?></td>
-      <td><a href="">Edit</a></td>
+      <td><a href="editlaptop.php?view=1&id=<?php echo $res['id']; ?>">Edit</a></td>
     </tr>
   
       <?php
@@ -239,7 +240,7 @@
     <tr>
       <th scope="row"><?php echo $count; ?></th>
       <td><?php echo $res['name']; ?></td>
-      <td><a href="">Edit</a></td>
+       <td><a href="editlaptop.php?view=1&id=<?php echo $res['id']; ?>">Edit</a></td>
     </tr>
   
       <?php
@@ -297,7 +298,7 @@
     <tr>
       <th scope="row"><?php echo $count; ?></th>
       <td><?php echo $res['name']; ?></td>
-      <td><a href="">Edit</a></td>
+      <td><a href="editlaptop.php?view=1&id=<?php echo $res['id']; ?>">Edit</a></td>
     </tr>
   
       <?php
@@ -354,7 +355,7 @@
     <tr>
       <th scope="row"><?php echo $count; ?></th>
       <td><?php echo $res['name']; ?></td>
-      <td><a href="">Edit</a></td>
+      <td><a href="editlaptop.php?view=1&id=<?php echo $res['id']; ?>">Edit</a></td>
     </tr>
   
       <?php
@@ -411,7 +412,7 @@
     <tr>
       <th scope="row"><?php echo $count; ?></th>
       <td><?php echo $res['name']; ?></td>
-      <td><a href="">Edit</a></td>
+       <td><a href="editlaptop.php?view=1&id=<?php echo $res['id']; ?>">Edit</a></td>
     </tr>
   
       <?php
@@ -468,7 +469,7 @@
     <tr>
       <th scope="row"><?php echo $count; ?></th>
       <td><?php echo $res['name']; ?></td>
-      <td><a href="">Edit</a></td>
+       <td><a href="editlaptop.php?view=1&id=<?php echo $res['id']; ?>">Edit</a></td>
     </tr>
   
       <?php

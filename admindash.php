@@ -18,11 +18,12 @@
     
     
     $username = $_SESSION['user_name'];
+    $usertype = $_SESSION['user_type'];
 
 
  
     
-    if($username == true){
+    if($username == true && $usertype == true){
         
     }
     
@@ -32,7 +33,6 @@
     }
 
 ?>
-
 <div class="container mt-5">
 	<div class="card-deck">
   <div class="card">
@@ -75,6 +75,8 @@
     </div>
   </div>
 </div>
+<br>
+<a href="adminpasswordchange.php" style="font-size: 18px;">Password Change</a>
 </div>
 </body>
 </html>

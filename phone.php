@@ -17,12 +17,14 @@
    
     
     
+     
     $username = $_SESSION['user_name'];
+    $usertype = $_SESSION['user_type'];
 
 
  
     
-    if($username == true){
+    if($username == true && $usertype == true){
         
     }
     
@@ -182,7 +184,7 @@
     <tr>
       <th scope="row"><?php echo $count; ?></th>
       <td><?php echo $res['name']; ?></td>
-      <td><a href="">Edit</a></td>
+      <td><a href="editphone.php?view=1&id=<?php echo $res['id']; ?>">Edit</a> <a style="color: red;" href="deletephone.php?delete=1&id=<?php echo $res['id']; ?>">Delete</a></td>
     </tr>
   
       <?php
@@ -238,7 +240,7 @@
     <tr>
       <th scope="row"><?php echo $count; ?></th>
       <td><?php echo $res['name']; ?></td>
-      <td><a href="">Edit</a></td>
+      <td><a href="editphone.php?view=1&id=<?php echo $res['id']; ?>">Edit</a> <a style="color: red;" href="deletephone.php?delete=1&id=<?php echo $res['id']; ?>">Delete</a></td>
     </tr>
   
       <?php
@@ -252,7 +254,6 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
@@ -296,7 +297,7 @@
     <tr>
       <th scope="row"><?php echo $count; ?></th>
       <td><?php echo $res['name']; ?></td>
-      <td><a href="">Edit</a></td>
+      <td><a href="editphone.php?view=1&id=<?php echo $res['id']; ?>">Edit</a> <a style="color: red;" href="deletephone.php?delete=1&id=<?php echo $res['id']; ?>">Delete</a></td><td><a href="">Edit</a></td>
     </tr>
   
       <?php
@@ -309,7 +310,6 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
@@ -353,7 +353,7 @@
     <tr>
       <th scope="row"><?php echo $count; ?></th>
       <td><?php echo $res['name']; ?></td>
-      <td><a href="">Edit</a></td>
+      <td><a href="editphone.php?view=1&id=<?php echo $res['id']; ?>">Edit</a> <a style="color: red;" href="deletephone.php?delete=1&id=<?php echo $res['id']; ?>">Delete</a></td>
     </tr>
   
       <?php
@@ -366,7 +366,6 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
@@ -391,7 +390,6 @@
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">Image</th>
       <th scope="col">Name</th>
       <th scope="col">Action</th>
     </tr>
@@ -410,9 +408,8 @@
   
     <tr>
       <th scope="row"><?php echo $count; ?></th>
-      <th scope="row"><img height="50" src="item/<?php echo $res['img_name'];?>"></th>
       <td><?php echo $res['name']; ?></td>
-      <td><a href="">Edit</a></td>
+      <td><a href="editphone.php?view=1&id=<?php echo $res['id']; ?>">Edit</a> <a style="color: red;" href="deletephone.php?delete=1&id=<?php echo $res['id']; ?>">Delete</a></td>
     </tr>
   
       <?php
@@ -425,7 +422,6 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>

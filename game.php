@@ -17,12 +17,14 @@
    
     
     
+      
     $username = $_SESSION['user_name'];
+    $usertype = $_SESSION['user_type'];
 
 
  
     
-    if($username == true){
+    if($username == true && $usertype == true){
         
     }
     
