@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Admin Dash</title>
+  <title>Admin Dash</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -50,7 +50,7 @@
         if(isset($_GET['view'])){
      
    
-            $sql = "SELECT * FROM laptop WHERE id='{$_GET['id']}'";
+            $sql = "SELECT * FROM tab WHERE id='{$_GET['id']}'";
             $rim= mysqli_query($conn,$sql);
         
  
@@ -127,7 +127,7 @@
         $price = $_POST['price'];
        
    
-            $sql = "UPDATE laptop SET brand = '$brand',name = '$name',des = '$des',stock = '$stock',price = '$price' WHERE id = '$id'";
+            $sql = "UPDATE tab SET brand = '$brand',name = '$name',des = '$des',stock = '$stock',price = '$price' WHERE id = '$id'";
 
                 $res = mysqli_query($conn,$sql);              
                 echo  '<meta http-equiv="refresh" content="0">';
@@ -149,7 +149,7 @@
         unlink("item/".$umg);
        
    
-            $sql = "UPDATE laptop SET img_name = '$uniquesavename' WHERE id = '$id'";
+            $sql = "UPDATE tab SET img_name = '$uniquesavename' WHERE id = '$id'";
 
                 $res = mysqli_query($conn,$sql);              
                 echo  '<meta http-equiv="refresh" content="0">';

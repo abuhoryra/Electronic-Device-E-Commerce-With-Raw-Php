@@ -181,7 +181,7 @@
     <tr>
       <th scope="row"><?php echo $count; ?></th>
       <td><?php echo $res['name']; ?></td>
-      <td><a href="">Edit</a></td>
+      <td><a href="edittv.php?view=1&id=<?php echo $res['id']; ?>">Edit</a> <a style="color: red;" href="deletetv.php?delete=1&id=<?php echo $res['id']; ?>">Delete</a></td>
     </tr>
   
       <?php
@@ -237,7 +237,7 @@
     <tr>
       <th scope="row"><?php echo $count; ?></th>
       <td><?php echo $res['name']; ?></td>
-      <td><a href="">Edit</a></td>
+      <td><a href="edittv.php?view=1&id=<?php echo $res['id']; ?>">Edit</a> <a style="color: red;" href="deletetv.php?delete=1&id=<?php echo $res['id']; ?>">Delete</a></td>
     </tr>
   
       <?php
@@ -295,7 +295,7 @@
     <tr>
       <th scope="row"><?php echo $count; ?></th>
       <td><?php echo $res['name']; ?></td>
-      <td><a href="">Edit</a></td>
+      <td><a href="edittv.php?view=1&id=<?php echo $res['id']; ?>">Edit</a> <a style="color: red;" href="deletetv.php?delete=1&id=<?php echo $res['id']; ?>">Delete</a></td>
     </tr>
   
       <?php

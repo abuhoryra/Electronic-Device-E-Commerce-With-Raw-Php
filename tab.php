@@ -114,7 +114,6 @@
         $filename = $_FILES["img"]["tmp_name"];
         list($width, $height) = getimagesize( $filename);       
         move_uploaded_file($filename,  $destFile);
-   
             $sql = "INSERT INTO tab(brand,name,des,stock,price,img_name)
                                 VALUES('$brand','$name','$des','$stock','$price','$uniquesavename')";
 
@@ -181,7 +180,7 @@
     <tr>
       <th scope="row"><?php echo $count; ?></th>
       <td><?php echo $res['name']; ?></td>
-      <td><a href="">Edit</a></td>
+       <td><a href="edittab.php?view=1&id=<?php echo $res['id']; ?>">Edit</a> <a style="color: red;" href="deletetab.php?delete=1&id=<?php echo $res['id']; ?>">Delete</a></td>
     </tr>
   
       <?php
@@ -237,7 +236,7 @@
     <tr>
       <th scope="row"><?php echo $count; ?></th>
       <td><?php echo $res['name']; ?></td>
-      <td><a href="">Edit</a></td>
+       <td><a href="edittab.php?view=1&id=<?php echo $res['id']; ?>">Edit</a> <a style="color: red;" href="deletetab.php?delete=1&id=<?php echo $res['id']; ?>">Delete</a></td>
     </tr>
   
       <?php

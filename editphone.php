@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Admin Dash</title>
+  <title>Admin Dash</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -15,6 +15,7 @@
   <?php
     session_start();
    
+    
     
        
     $username = $_SESSION['user_name'];
@@ -35,7 +36,11 @@
 ?>
 
 <div class="container mt-3">
+<div class="row">
+  <div class="col-md-8" style="border-right: 2px solid black;">
 
+    <h3 style="text-align: center;">Edit Basic Info</h3>
+    <br>
  
     <?php
         include_once("connection.php");
@@ -56,7 +61,7 @@
   <div class="input-group-prepend">
     <span class="input-group-text" id="inputGroup-sizing-default">Brand</span>
   </div>
-  <input type="text" name="name" value="<?php echo $res['brand'];?>" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" required>
+  <input type="text" name="brand" value="<?php echo $res['brand'];?>" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" required>
 </div>
       <div class="input-group mb-3">
   <div class="input-group-prepend">
@@ -83,14 +88,73 @@
   <input type="number" name="price" value="<?php echo $res['price'];?>" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" required>
 </div>
 
- <img src="item/<?php echo $res['img_name'];?>" id="image" style="" height="150" width="100">
-    <label>Insert Your Image</label>
-    <input name="img" onchange="showImage.call(this)" type="file" required>
 <div style="text-align: center;">
-<button class="btn btn-primary" type="submit" name="submit">Add</button>
+<button class="btn btn-primary" type="submit" name="submit">Update</button>
 </div>
-    </form>
+ </form>
+ </div>
+
+ <div class="col-md-4" style="text-align: center;">
+  <h3>Edit Product Image</h3>
+  <br>
+  <form method="post" action="" enctype="multipart/form-data">
+ <img src="item/<?php echo $res['img_name'];?>" id="image" height="150" width="200">
+ <br>
+    <label>Update Your Image</label>
+    <br>
+    <br>
+    <input name="img" onchange="showImage.call(this)" type="file" required>
+    <br>
+    <br>
+    <button type="submit" name="sub" class="btn btn-primary">Update</button>
+  </form>
+</div>
+   
                  <?php
+
+
+        
+     
+        
+        if(isset($_POST['submit'])){
+
+        
+        $id = $res['id'];
+        $brand = $_POST['brand'];    
+        $name = $_POST['name'];
+        $des = $_POST['des'];
+        $stock = $_POST['stock'];
+        $price = $_POST['price'];
+       
+   
+            $sql = "UPDATE phone SET brand = '$brand',name = '$name',des = '$des',stock = '$stock',price = '$price' WHERE id = '$id'";
+
+                $res = mysqli_query($conn,$sql);              
+                echo  '<meta http-equiv="refresh" content="0">';
+            
+        }
+
+        if(isset($_POST['sub'])){
+
+        
+        $id = $res['id'];
+        $umg = $res['img_name']; 
+        $imagePath = "item/";
+        $uniquesavename=time().uniqid(rand()) . '.jpg';
+        $destFile = $imagePath . $uniquesavename;
+        $filename = $_FILES["img"]["tmp_name"];
+        list($width, $height) = getimagesize( $filename);       
+        move_uploaded_file($filename,  $destFile);
+
+        unlink("item/".$umg);
+       
+   
+            $sql = "UPDATE phone SET img_name = '$uniquesavename' WHERE id = '$id'";
+
+                $res = mysqli_query($conn,$sql);              
+                echo  '<meta http-equiv="refresh" content="0">';
+            
+        }
             
                  }
                }
@@ -105,6 +169,7 @@
 <br>
 <hr>
 <a href="admindash.php" style="text-align: center; font-size: 25px; font-weight: bolder;">Back To Home</a>
+</div>
 </div>
  <script type="text/javascript">
     

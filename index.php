@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Home</title>
-
+  <link href="https://fonts.googleapis.com/css?family=Vollkorn&display=swap" rel="stylesheet">
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -14,7 +14,12 @@
   <link href="css/simple-sidebar.css" rel="stylesheet">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+<style type="text/css">
+  h1{
+    font-family: 'Vollkorn', serif;
+    color: #0099ff;
+  }
+</style>
 </head>
 <body>
 	 <div class="d-flex" id="wrapper">
@@ -124,7 +129,7 @@
 
     <?php
     include_once("connection.php");
-      $rom="SELECT * FROM laptop LIMIT 8";
+      $rom="SELECT * FROM laptop LIMIT 4";
       $rim = mysqli_query($conn,$rom);
       
       while ($res = mysqli_fetch_array($rim)) {
@@ -153,11 +158,161 @@
   ?>
 
 </div>
+<br>
+  <h1 style="text-align: center;">Phone</h1>
+  <hr>
+  <div class="card-deck">
+
+    <?php
+    include_once("connection.php");
+      $rom="SELECT * FROM phone LIMIT 4";
+      $rim = mysqli_query($conn,$rom);
+      
+      while ($res = mysqli_fetch_array($rim)) {
+    
+       ?>
+         <div class="col-lg-3 col-md-6 col-12">
+          <br>
+       <div class="card" style="">
+        <div style="text-align: center;margin-top: 5px;">
+      <img class="card-img-top" style="height: 250px; width: 200px;" src="item/<?php echo $res['img_name'] ?>">
+      </div>
+      <div class="card-body">
+
+        <p><?php echo $res['name']; ?><a style="float: right;" href="">View More</a></p> 
+      
+
+</div>
+   
 
 
 
+  </div>
+  </div>
+
+       <?php
+     
+}
+  ?>
+
+</div>
+
+<br>
+  <h1 style="text-align: center;">Tablet</h1>
+  <hr>
+  <div class="card-deck">
+
+    <?php
+    include_once("connection.php");
+      $rom="SELECT * FROM tab LIMIT 4";
+      $rim = mysqli_query($conn,$rom);
+      
+      while ($res = mysqli_fetch_array($rim)) {
+    
+       ?>
+         <div class="col-lg-3 col-md-6 col-12">
+          <br>
+       <div class="card" style="">
+        <div style="text-align: center;margin-top: 5px;">
+      <img class="card-img-top" style="height: 250px; width: 200px;" src="item/<?php echo $res['img_name'] ?>">
+      </div>
+      <div class="card-body">
+
+        <p><?php echo $res['name']; ?><a style="float: right;" href="">View More</a></p> 
+      
+
+</div>
+   
 
 
+
+  </div>
+  </div>
+
+       <?php
+     
+}
+  ?>
+
+</div>
+
+<br>
+  <h1 style="text-align: center;">TV</h1>
+  <hr>
+  <div class="card-deck">
+
+    <?php
+    include_once("connection.php");
+      $rom="SELECT * FROM tv LIMIT 4";
+      $rim = mysqli_query($conn,$rom);
+      
+      while ($res = mysqli_fetch_array($rim)) {
+    
+       ?>
+         <div class="col-lg-3 col-md-6 col-12">
+          <br>
+       <div class="card" style="">
+        <div style="text-align: center;margin-top: 5px;">
+      <img class="card-img-top" style="height: 250px; width: 200px;" src="item/<?php echo $res['img_name'] ?>">
+      </div>
+      <div class="card-body">
+
+        <p><?php echo $res['name']; ?><a style="float: right;" href="">View More</a></p> 
+      
+
+</div>
+   
+
+
+
+  </div>
+  </div>
+
+       <?php
+     
+}
+  ?>
+
+</div>
+
+<br>
+  <h1 style="text-align: center;">Game</h1>
+  <hr>
+  <div class="card-deck">
+
+    <?php
+    include_once("connection.php");
+      $rom="SELECT * FROM game LIMIT 4";
+      $rim = mysqli_query($conn,$rom);
+      
+      while ($res = mysqli_fetch_array($rim)) {
+    
+       ?>
+         <div class="col-lg-3 col-md-6 col-12">
+          <br>
+       <div class="card" style="">
+        <div style="text-align: center;margin-top: 5px;">
+      <img class="card-img-top" style="height: 250px; width: 200px;" src="item/<?php echo $res['img_name'] ?>">
+      </div>
+      <div class="card-body">
+
+        <p><?php echo $res['name']; ?><a style="float: right;" href="">View More</a></p> 
+      
+
+</div>
+   
+
+
+
+  </div>
+  </div>
+
+       <?php
+     
+}
+  ?>
+
+</div>
 
 
   </div>
