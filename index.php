@@ -141,7 +141,53 @@
       <img class="card-img-top" style="height: 250px;" src="item/<?php echo $res['img_name'] ?>">
       <div class="card-body">
 
-        <p><?php echo $res['name']; ?><a style="float: right;" href="">View More</a></p> 
+        <p><?php echo $res['name']; ?><span style="float: right; color: salmon;"><?php echo $res['price'].' Tk.'; ?></span></p> 
+        <p>Stock: <span style="color: red;"><?php echo $res['stock']; ?> </span><span style="float: right;"><a style="float: right;" href="" class="" data-toggle="modal" data-target="#exampleModalCenter1<?php echo $res['id'];?>">
+  View More
+</a></span></p> 
+
+
+
+        <!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter1<?php echo $res['id']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle"><?php echo $res['name'];?></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <?php
+       include_once("connection.php");
+       $id = $res['id'];
+      $rkm="SELECT * FROM laptop WHERE id = '$id'";
+      $rtm = mysqli_query($conn,$rkm);
+      
+      while ($result = mysqli_fetch_array($rtm)) { 
+        ?>
+        <div style="text-align: center;">
+        <img class="img-responsive" style="height: 150px;" src="item/<?php echo $res['img_name'] ?>">
+        </div>
+        <br>
+        <p><span style="color: #00cc99;">Brand: </span> <?php echo $result['brand'];?></p>
+        <p><span style="color: #00cc99;">Name: </span> <?php echo $result['name'];?></p>
+        <p><span style="color: #00cc99;">Description: </span> <?php echo $result['des'];?></p>
+        <?php
+      }
+
+       ?>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
       
 
 </div>
@@ -179,8 +225,52 @@
       </div>
       <div class="card-body">
 
-        <p><?php echo $res['name']; ?><a style="float: right;" href="">View More</a></p> 
+         <p><?php echo $res['name']; ?><span style="float: right; color: salmon;"><?php echo $res['price'].' Tk.'; ?></span></p> 
+        <p>Stock: <span style="color: red;"><?php echo $res['stock']; ?> </span><span style="float: right;"><a style="float: right;" href="" class="" data-toggle="modal" data-target="#exampleModalCenter1<?php echo $res['id'];?>">
+  View More
+</a></span></p> 
       
+
+        <!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter1<?php echo $res['id']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle"><?php echo $res['name'];?></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <?php
+       include_once("connection.php");
+       $id = $res['id'];
+      $rkm="SELECT * FROM phone WHERE id = '$id'";
+      $rtm = mysqli_query($conn,$rkm);
+      
+      while ($result = mysqli_fetch_array($rtm)) { 
+        ?>
+        <div style="text-align: center;">
+        <img class="img-responsive" style="height: 150px;" src="item/<?php echo $res['img_name'] ?>">
+        </div>
+        <br>
+        <p><span style="color: #00cc99;">Brand: </span> <?php echo $result['brand'];?></p>
+        <p><span style="color: #00cc99;">Name: </span> <?php echo $result['name'];?></p>
+        <p><span style="color: #00cc99;">Description: </span> <?php echo $result['des'];?></p>
+        <?php
+      }
+
+       ?>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 </div>
    
@@ -218,9 +308,52 @@
       </div>
       <div class="card-body">
 
-        <p><?php echo $res['name']; ?><a style="float: right;" href="">View More</a></p> 
+         <p><?php echo $res['name']; ?><span style="float: right; color: salmon;"><?php echo $res['price'].' Tk.'; ?></span></p> 
+        <p>Stock: <span style="color: red;"><?php echo $res['stock']; ?> </span><span style="float: right;"><a style="float: right;" href="" class="" data-toggle="modal" data-target="#exampleModalCenter1<?php echo $res['id'];?>">
+  View More
+</a></span></p> 
       
 
+        <!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter1<?php echo $res['id']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle"><?php echo $res['name'];?></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <?php
+       include_once("connection.php");
+       $id = $res['id'];
+      $rkm="SELECT * FROM tab WHERE id = '$id'";
+      $rtm = mysqli_query($conn,$rkm);
+      
+      while ($result = mysqli_fetch_array($rtm)) { 
+        ?>
+        <div style="text-align: center;">
+        <img class="img-responsive" style="height: 150px;" src="item/<?php echo $res['img_name'] ?>">
+        </div>
+        <br>
+        <p><span style="color: #00cc99;">Brand: </span> <?php echo $result['brand'];?></p>
+        <p><span style="color: #00cc99;">Name: </span> <?php echo $result['name'];?></p>
+        <p><span style="color: #00cc99;">Description: </span> <?php echo $result['des'];?></p>
+        <?php
+      }
+
+       ?>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 </div>
    
 
@@ -257,7 +390,53 @@
       </div>
       <div class="card-body">
 
-        <p><?php echo $res['name']; ?><a style="float: right;" href="">View More</a></p> 
+                <p><?php echo $res['name']; ?><span style="float: right; color: salmon;"><?php echo $res['price'].' Tk.'; ?></span></p> 
+        <p>Stock: <span style="color: red;"><?php echo $res['stock']; ?> </span><span style="float: right;"><a style="float: right;" href="" class="" data-toggle="modal" data-target="#exampleModalCenter2<?php echo $res['id'];?>">
+  View More
+</a></span></p> 
+
+
+
+        <!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter2<?php echo $res['id']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle"><?php echo $res['name'];?></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <?php
+       include_once("connection.php");
+       $id = $res['id'];
+      $rkm="SELECT * FROM tv WHERE id = '$id'";
+      $rtm = mysqli_query($conn,$rkm);
+      
+      while ($result = mysqli_fetch_array($rtm)) { 
+        ?>
+        <div style="text-align: center;">
+        <img class="img-responsive" style="height: 150px;" src="item/<?php echo $res['img_name'] ?>">
+        </div>
+        <br>
+        <p><span style="color: #00cc99;">Brand: </span> <?php echo $result['brand'];?></p>
+        <p><span style="color: #00cc99;">Name: </span> <?php echo $result['name'];?></p>
+        <p><span style="color: #00cc99;">Description: </span> <?php echo $result['des'];?></p>
+        <?php
+      }
+
+       ?>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
       
 
 </div>
@@ -296,7 +475,53 @@
       </div>
       <div class="card-body">
 
-        <p><?php echo $res['name']; ?><a style="float: right;" href="">View More</a></p> 
+               <p><?php echo $res['name']; ?><span style="float: right; color: salmon;"><?php echo $res['price'].' Tk.'; ?></span></p> 
+        <p>Stock: <span style="color: red;"><?php echo $res['stock']; ?> </span><span style="float: right;"><a style="float: right;" href="" class="" data-toggle="modal" data-target="#exampleModalCenter3<?php echo $res['id'];?>">
+  View More
+</a></span></p> 
+
+
+
+        <!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter3<?php echo $res['id']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle"><?php echo $res['name'];?></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <?php
+       include_once("connection.php");
+       $id = $res['id'];
+      $rkm="SELECT * FROM game WHERE id = '$id'";
+      $rtm = mysqli_query($conn,$rkm);
+      
+      while ($result = mysqli_fetch_array($rtm)) { 
+        ?>
+        <div style="text-align: center;">
+        <img class="img-responsive" style="height: 150px;" src="item/<?php echo $res['img_name'] ?>">
+        </div>
+        <br>
+        <p><span style="color: #00cc99;">Brand: </span> <?php echo $result['brand'];?></p>
+        <p><span style="color: #00cc99;">Name: </span> <?php echo $result['name'];?></p>
+        <p><span style="color: #00cc99;">Description: </span> <?php echo $result['des'];?></p>
+        <?php
+      }
+
+       ?>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
       
 
 </div>
