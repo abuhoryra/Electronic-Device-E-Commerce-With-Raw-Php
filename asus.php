@@ -12,6 +12,7 @@
 
   <!-- Custom styles for this template -->
   <link href="css/simple-sidebar.css" rel="stylesheet">
+ <link href="css/cart.css" rel="stylesheet">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style type="text/css">
@@ -138,7 +139,12 @@
          <div class="col-lg-3 col-md-6 col-12">
           <br>
        <div class="card" style="">
-      <img class="card-img-top" style="height: 250px;" src="item/<?php echo $res['img_name'] ?>">
+        <div class="hovereffect">
+        <img class="card-img-top" style="height: 250px;" src="item/<?php echo $res['img_name'] ?>">
+        <div class="overlay">
+           <a class="info" href="#">Add Cart</a>
+        </div>
+    </div>
       <div class="card-body">
 
         <p><?php echo $res['name']; ?><span style="float: right; color: salmon;"><?php echo $res['price'].' Tk.'; ?></span></p> 

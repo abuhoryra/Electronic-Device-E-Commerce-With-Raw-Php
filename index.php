@@ -9,10 +9,8 @@
   <link href="https://fonts.googleapis.com/css?family=Vollkorn&display=swap" rel="stylesheet">
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Custom styles for this template -->
   <link href="css/simple-sidebar.css" rel="stylesheet">
-
+  <link href="css/cart.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style type="text/css">
   h1{
@@ -109,6 +107,88 @@
               <a class="nav-link" href="index.php">Home </a>
             </li>
             <li class="nav-item">
+              <!-- Button trigger modal -->
+<a href="" class="nav-link" data-toggle="modal" data-target="#exampleModal7">
+  Cart
+</a>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal7" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content"  style="width: 700px !important;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Cart</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <table class="table table-bordered">
+    <tr>
+      <th>#</th>
+     <th>Item Name</th>
+     <th>Quantity</th>
+     <th>Price</th>
+     <th>Total</th>
+     <th>Action</th>
+    </tr>
+   <?php
+   if(isset($_COOKIE["shopping_cart"]))
+   {
+    $total = 0;
+    $cookie_data = stripslashes($_COOKIE['shopping_cart']);
+    $cart_data = json_decode($cookie_data, true);
+    $count = 0;
+    foreach($cart_data as $keys => $values){
+       $count++;
+   ?>
+    <tr>
+    <td><?php echo $count ?></td>
+     <td><?php echo $values["item_name"]; ?></td>
+     <td><?php echo $values["item_quantity"]; ?></td>
+     <td> <?php echo $values["item_price"]; ?> Tk.</td>
+     <td> <?php echo number_format($values["item_quantity"] * $values["item_price"], 2);?> Tk.</td>
+     <td><a href="add_cart.php?action=delete&id=<?php echo $values["item_id"]; ?>"><span class="text-danger">Remove</span></a></td>
+    </tr>
+   <?php 
+     $total = $total + ($values["item_quantity"] * $values["item_price"]);
+    }
+   ?>
+    <tr>
+     <td colspan="4" align="right">Total</td>
+     <td align="right">$ <?php echo number_format($total, 2); ?></td>
+     <td> <?php
+       
+       if($_COOKIE["shopping_cart"]){
+        ?>
+        <a href="add_cart.php?action=clear&id=<?php echo $values["item_id"]; ?>"><span class="text-danger">Remove Al</span></a>
+        <?php
+       }
+
+     ?> </td>
+    </tr>
+   <?php
+   }
+   else
+   {
+    echo '
+    <tr>
+     <td colspan="5" align="center">No Items in Cart</td>
+    </tr>
+    ';
+   }
+   ?>
+   </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="login.php">Login</a>
             </li>
             <li class="nav-item">
@@ -118,7 +198,9 @@
         </div>
       </nav>
 
-     
+    <style type="text/css">
+
+    </style> 
 
 
 
@@ -138,7 +220,19 @@
          <div class="col-lg-3 col-md-6 col-12">
           <br>
        <div class="card" style="">
-      <img class="card-img-top" style="height: 250px;" src="item/<?php echo $res['img_name'] ?>">
+      
+       <div class="hovereffect">
+        <img class="card-img-top" style="height: 250px;" src="item/<?php echo $res['img_name'] ?>">
+        <div class="overlay">
+          <form method="post" action="add_cart.php">
+       <input type="hidden" name="quantity" value="1" class="form-control" />
+      <input type="hidden" name="hidden_name" value="<?php echo $res["name"]; ?>" />
+      <input type="hidden" name="hidden_price" value="<?php echo $res["price"]; ?>" />
+      <input type="hidden" name="hidden_id" value="<?php echo $res["id"]; ?>" />
+           <button type="submit" name="add_to_cart" class="info">Add Cart</button>
+           </form>
+        </div>
+    </div>
       <div class="card-body">
 
         <p><?php echo $res['name']; ?><span style="float: right; color: salmon;"><?php echo $res['price'].' Tk.'; ?></span></p> 
@@ -220,9 +314,20 @@
          <div class="col-lg-3 col-md-6 col-12">
           <br>
        <div class="card" style="">
-        <div style="text-align: center;margin-top: 5px;">
-      <img class="card-img-top" style="height: 250px; width: 200px;" src="item/<?php echo $res['img_name'] ?>">
-      </div>
+            <div class="hovereffect">
+        <img class="card-img-top" style="height: 250px; width: 200px; display: block; margin-left: auto; margin-right: auto;" src="item/<?php echo $res['img_name'] ?>">
+        <div class="overlay">
+           <form method="post" action="add_cart.php">
+       <input type="hidden" name="quantity" value="1" class="form-control" />
+      <input type="hidden" name="hidden_name" value="<?php echo $res["name"]; ?>" />
+      <input type="hidden" name="hidden_price" value="<?php echo $res["price"]; ?>" />
+      <input type="hidden" name="hidden_id" value="<?php echo $res["id"]; ?>" />
+           <button type="submit" name="add_to_cart" class="info">Add Cart</button>
+           </form>
+        </div>
+    </div>
+      
+      
       <div class="card-body">
 
          <p><?php echo $res['name']; ?><span style="float: right; color: salmon;"><?php echo $res['price'].' Tk.'; ?></span></p> 
@@ -303,9 +408,18 @@
          <div class="col-lg-3 col-md-6 col-12">
           <br>
        <div class="card" style="">
-        <div style="text-align: center;margin-top: 5px;">
-      <img class="card-img-top" style="height: 250px; width: 200px;" src="item/<?php echo $res['img_name'] ?>">
-      </div>
+         <div class="hovereffect">
+        <img class="card-img-top" style="height: 250px; width: 200px; display: block; margin-left: auto; margin-right: auto;" src="item/<?php echo $res['img_name'] ?>">
+        <div class="overlay">
+           <form method="post" action="add_cart.php">
+       <input type="hidden" name="quantity" value="1" class="form-control" />
+      <input type="hidden" name="hidden_name" value="<?php echo $res["name"]; ?>" />
+      <input type="hidden" name="hidden_price" value="<?php echo $res["price"]; ?>" />
+      <input type="hidden" name="hidden_id" value="<?php echo $res["id"]; ?>" />
+           <button type="submit" name="add_to_cart" class="info">Add Cart</button>
+           </form>
+        </div>
+    </div>
       <div class="card-body">
 
          <p><?php echo $res['name']; ?><span style="float: right; color: salmon;"><?php echo $res['price'].' Tk.'; ?></span></p> 
@@ -370,7 +484,7 @@
 </div>
 
 <br>
-  <h1 style="text-align: center;">TV</h1>
+   <h1 style="text-align: center;">TV</h1>
   <hr>
   <div class="card-deck">
 
@@ -385,23 +499,31 @@
          <div class="col-lg-3 col-md-6 col-12">
           <br>
        <div class="card" style="">
-        <div style="text-align: center;margin-top: 5px;">
-      <img class="card-img-top" style="height: 250px; width: 200px;" src="item/<?php echo $res['img_name'] ?>">
-      </div>
+         <div class="hovereffect">
+        <img class="card-img-top" style="height: 250px; display: block; margin-left: auto; margin-right: auto;" src="item/<?php echo $res['img_name'] ?>">
+        <div class="overlay">
+           <form method="post" action="add_cart.php">
+       <input type="hidden" name="quantity" value="1" class="form-control" />
+      <input type="hidden" name="hidden_name" value="<?php echo $res["name"]; ?>" />
+      <input type="hidden" name="hidden_price" value="<?php echo $res["price"]; ?>" />
+      <input type="hidden" name="hidden_id" value="<?php echo $res["id"]; ?>" />
+           <button type="submit" name="add_to_cart" class="info">Add Cart</button>
+           </form>
+        </div>
+    </div>
       <div class="card-body">
 
-                <p><?php echo $res['name']; ?><span style="float: right; color: salmon;"><?php echo $res['price'].' Tk.'; ?></span></p> 
-        <p>Stock: <span style="color: red;"><?php echo $res['stock']; ?> </span><span style="float: right;"><a style="float: right;" href="" class="" data-toggle="modal" data-target="#exampleModalCenter2<?php echo $res['id'];?>">
+         <p><?php echo $res['name']; ?><span style="float: right; color: salmon;"><?php echo $res['price'].' Tk.'; ?></span></p> 
+        <p>Stock: <span style="color: red;"><?php echo $res['stock']; ?> </span><span style="float: right;"><a style="float: right;" href="" class="" data-toggle="modal" data-target="#exampleModalCenter12<?php echo $res['id'];?>">
   View More
 </a></span></p> 
-
-
+      
 
         <!-- Button trigger modal -->
 
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModalCenter2<?php echo $res['id']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="exampleModalCenter12<?php echo $res['id']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -437,8 +559,6 @@
     </div>
   </div>
 </div>
-      
-
 </div>
    
 
@@ -453,9 +573,8 @@
   ?>
 
 </div>
-
 <br>
-  <h1 style="text-align: center;">Game</h1>
+   <h1 style="text-align: center;">Game</h1>
   <hr>
   <div class="card-deck">
 
@@ -470,23 +589,31 @@
          <div class="col-lg-3 col-md-6 col-12">
           <br>
        <div class="card" style="">
-        <div style="text-align: center;margin-top: 5px;">
-      <img class="card-img-top" style="height: 250px; width: 200px;" src="item/<?php echo $res['img_name'] ?>">
-      </div>
+         <div class="hovereffect">
+        <img class="card-img-top" style="height: 250px; width: 200px; display: block; margin-left: auto; margin-right: auto;" src="item/<?php echo $res['img_name'] ?>">
+        <div class="overlay">
+           <form method="post" action="add_cart.php">
+       <input type="hidden" name="quantity" value="1" class="form-control" />
+      <input type="hidden" name="hidden_name" value="<?php echo $res["name"]; ?>" />
+      <input type="hidden" name="hidden_price" value="<?php echo $res["price"]; ?>" />
+      <input type="hidden" name="hidden_id" value="<?php echo $res["id"]; ?>" />
+           <button type="submit" name="add_to_cart" class="info">Add Cart</button>
+           </form>
+        </div>
+    </div>
       <div class="card-body">
 
-               <p><?php echo $res['name']; ?><span style="float: right; color: salmon;"><?php echo $res['price'].' Tk.'; ?></span></p> 
-        <p>Stock: <span style="color: red;"><?php echo $res['stock']; ?> </span><span style="float: right;"><a style="float: right;" href="" class="" data-toggle="modal" data-target="#exampleModalCenter3<?php echo $res['id'];?>">
+         <p><?php echo $res['name']; ?><span style="float: right; color: salmon;"><?php echo $res['price'].' Tk.'; ?></span></p> 
+        <p>Stock: <span style="color: red;"><?php echo $res['stock']; ?> </span><span style="float: right;"><a style="float: right;" href="" class="" data-toggle="modal" data-target="#exampleModalCenter12<?php echo $res['id'];?>">
   View More
 </a></span></p> 
-
-
+      
 
         <!-- Button trigger modal -->
 
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModalCenter3<?php echo $res['id']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="exampleModalCenter12<?php echo $res['id']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -522,8 +649,6 @@
     </div>
   </div>
 </div>
-      
-
 </div>
    
 
@@ -538,7 +663,6 @@
   ?>
 
 </div>
-
 
   </div>
     <!-- /#page-content-wrapper -->
