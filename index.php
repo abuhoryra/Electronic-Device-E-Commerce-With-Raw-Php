@@ -34,12 +34,12 @@
     Laptop
   </button>
   <div class="dropdown-menu bg-info">
-        <a href="#" class="list-group-item list-group-item-action bg-info" >Apple</a>
-        <a href="#" class="list-group-item list-group-item-action bg-info">Asus</a>
-        <a href="#" class="list-group-item list-group-item-action bg-info">Accer</a>
-        <a href="#" class="list-group-item list-group-item-action bg-info">Hp</a>
-        <a href="#" class="list-group-item list-group-item-action bg-info">Dell</a>
-        <a href="#" class="list-group-item list-group-item-action bg-info">Lenevo</a>
+        <a href="apple.php" class="list-group-item list-group-item-action bg-info" >Apple</a>
+        <a href="asus.php" class="list-group-item list-group-item-action bg-info">Asus</a>
+        <a href="accer.php" class="list-group-item list-group-item-action bg-info">Accer</a>
+        <a href="hp.php" class="list-group-item list-group-item-action bg-info">Hp</a>
+        <a href="dell.php" class="list-group-item list-group-item-action bg-info">Dell</a>
+        <a href="lenevo.php" class="list-group-item list-group-item-action bg-info">Lenevo</a>
   </div>
 </div>
 
@@ -49,11 +49,11 @@
     Mobile
   </button>
   <div class="dropdown-menu bg-info">
-        <a href="#" class="list-group-item list-group-item-action bg-info" >iPhone</a>
-        <a href="#" class="list-group-item list-group-item-action bg-info">Samsung</a>
-        <a href="#" class="list-group-item list-group-item-action bg-info">Huawei</a>
-        <a href="#" class="list-group-item list-group-item-action bg-info">Xiomi</a>
-        <a href="#" class="list-group-item list-group-item-action bg-info">OnePlus</a>
+        <a href="iphone.php" class="list-group-item list-group-item-action bg-info" >iPhone</a>
+        <a href="samsung.php" class="list-group-item list-group-item-action bg-info">Samsung</a>
+        <a href="huawei.php" class="list-group-item list-group-item-action bg-info">Huawei</a>
+        <a href="xiomi.php" class="list-group-item list-group-item-action bg-info">Xiomi</a>
+        <a href="oneplus.php" class="list-group-item list-group-item-action bg-info">OnePlus</a>
   </div>
 </div>
 
@@ -63,8 +63,8 @@
     Tablet
   </button>
   <div class="dropdown-menu bg-info">
-        <a href="#" class="list-group-item list-group-item-action bg-info" >iPad</a>
-        <a href="#" class="list-group-item list-group-item-action bg-info">Samsung</a>
+        <a href="ipad.php" class="list-group-item list-group-item-action bg-info" >iPad</a>
+        <a href="samsung_tab.php" class="list-group-item list-group-item-action bg-info">Samsung</a>
   </div>
 </div>
 
@@ -73,9 +73,9 @@
     TV
   </button>
   <div class="dropdown-menu bg-info">
-        <a href="#" class="list-group-item list-group-item-action bg-info" >Sony</a>
-        <a href="#" class="list-group-item list-group-item-action bg-info">Samsung</a>
-        <a href="#" class="list-group-item list-group-item-action bg-info">Lg</a>
+        <a href="sony.php" class="list-group-item list-group-item-action bg-info" >Sony</a>
+        <a href="samsung_tv.php" class="list-group-item list-group-item-action bg-info">Samsung</a>
+        <a href="lg.php" class="list-group-item list-group-item-action bg-info">Lg</a>
   </div>
 </div>
 
@@ -85,8 +85,8 @@
     Gaming
   </button>
   <div class="dropdown-menu bg-info">
-        <a href="#" class="list-group-item list-group-item-action bg-info" >Xbox</a>
-        <a href="#" class="list-group-item list-group-item-action bg-info">PS4</a>
+        <a href="xbox.php" class="list-group-item list-group-item-action bg-info" >Xbox</a>
+        <a href="ps4.php" class="list-group-item list-group-item-action bg-info">PS4</a>
   </div>
 </div>
       </div>
@@ -106,10 +106,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="#">Home </a>
+              <a class="nav-link" href="index.php">Home </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Login</a>
+              <a class="nav-link" href="login.php">Login</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="signup.php">Signup</a>
