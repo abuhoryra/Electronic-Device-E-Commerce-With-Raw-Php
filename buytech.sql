@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 30, 2019 at 10:33 PM
+-- Generation Time: Jul 17, 2019 at 12:16 AM
 -- Server version: 10.1.32-MariaDB
 -- PHP Version: 7.2.5
 
@@ -98,6 +98,43 @@ INSERT INTO `laptop` (`id`, `brand`, `name`, `des`, `stock`, `price`, `img_name`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `order_history`
+--
+
+CREATE TABLE `order_history` (
+  `id` int(11) NOT NULL,
+  `order_number` int(10) NOT NULL,
+  `username` varchar(30) NOT NULL,
+  `item` varchar(255) NOT NULL,
+  `quantity` int(10) NOT NULL,
+  `price` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `phone` int(30) NOT NULL,
+  `date_time` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `order_history`
+--
+
+INSERT INTO `order_history` (`id`, `order_number`, `username`, `item`, `quantity`, `price`, `address`, `phone`, `date_time`) VALUES
+(101, 332196, 'pranto', 'XPS 13', 1, '130000', 'Bashundhara Residential Area', 0, '0000-00-00 00:00:00'),
+(102, 332196, 'pranto', 'Specture X360', 1, '120000', 'Bashundhara Residential Area', 0, '0000-00-00 00:00:00'),
+(103, 176682, 'pranto', 'XPS 13', 1, '130000', 'Bashundhara Residential Area', 0, '0000-00-00 00:00:00'),
+(104, 109942, 'pranto', 'XPS 13', 1, '130000', 'Bashundhara Residential Area', 1629710423, '0000-00-00 00:00:00'),
+(105, 317752, 'pranto', 'XPS 13', 1, '130000', 'Bashundhara Residential Area', 1629710423, '0000-00-00 00:00:00'),
+(106, 105799, 'pranto', 'Samsung Galaxy S10', 1, '100000', 'Bashundhara Residential Area', 1629710423, '0000-00-00 00:00:00'),
+(107, 315902, 'pranto', 'Samsung Galaxy S10', 1, '100000', 'Bashundhara Residential Area', 1629710423, '0000-00-00 00:00:00'),
+(108, 173076, 'pranto', 'Specture X360', 1, '120000', 'Bashundhara Residential Area', 1629710423, '2019-07-17 00:12:56'),
+(109, 291463, 'pranto', 'Specture X360', 1, '120000', 'Bashundhara Residential Area', 1629710423, '2019-07-17 03:57:52'),
+(110, 291463, 'pranto', 'XPS 13', 1, '130000', 'Bashundhara Residential Area', 1629710423, '2019-07-17 03:57:52'),
+(111, 291463, 'pranto', 'MacBook Pro 2019', 1, '1550000', 'Bashundhara Residential Area', 1629710423, '2019-07-17 03:57:52'),
+(112, 296818, 'pranto', 'XPS 13', 1, '130000', 'Bashundhara Residential Area', 1629710423, '2019-07-17 04:13:46'),
+(113, 177986, 'shakib', 'XPS 13', 1, '130000', 'Bashundhara R/A', 1732533232, '2019-07-17 04:14:44');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `phone`
 --
 
@@ -120,6 +157,34 @@ INSERT INTO `phone` (`id`, `brand`, `name`, `des`, `stock`, `price`, `img_name`)
 (502, 'Samsung', 'Samsung Galaxy S10', 'Best Phone Ever', 12, 100000, '1561150655765186195d0d44bf750ed.jpg'),
 (503, 'Xiomi', 'Mi9', 'Best Phone Ever', 3, 30000, '156115069317523093125d0d44e50f02f.jpg'),
 (504, 'OnePlus', 'OnePlus 7 Pro', 'Best Phone Ever', 5, 70000, '15611503165362008025d0d436c6cbcf.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `signup`
+--
+
+CREATE TABLE `signup` (
+  `id` int(11) NOT NULL,
+  `first_name` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `address` text NOT NULL,
+  `phone` int(30) NOT NULL,
+  `zipcode` varchar(10) NOT NULL,
+  `type` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `signup`
+--
+
+INSERT INTO `signup` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `address`, `phone`, `zipcode`, `type`) VALUES
+(1, 'Md. Abu Horyra', 'Pranto', 'pranto', 'mahpranto@outlook.com', '$2y$10$/mwCn9fPLFBOLaJYNIqoguW.Wmg7ZexFAC.hPDMwRWEe5tmWybcA6', 'Bashundhara Residential Area', 1629710423, '1229', 'public'),
+(2, 'Shakib', 'Rahman', 'shakib', 'shakib@gmail.com', '$2y$10$Nx64OxTNaFlvdqOHFayGzeCmg9gl/lobMV1d9PeoG/ppflGBXkf/S', 'Bashundhara R/A', 1732533232, '1229', 'public'),
+(3, 'sdg', 'sdg', 'dgfhd', 'dsg@gfs', '$2y$10$7tDemzaZXHwywPziWG35POBlCHtbQQXiloJwKMnVhYB4AkIfILmq2', 'sfdghsdh', 537357, '78547', 'public');
 
 -- --------------------------------------------------------
 
@@ -196,9 +261,21 @@ ALTER TABLE `laptop`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `order_history`
+--
+ALTER TABLE `order_history`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `phone`
 --
 ALTER TABLE `phone`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `signup`
+--
+ALTER TABLE `signup`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -227,7 +304,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `game`
 --
 ALTER TABLE `game`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=707;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=705;
 
 --
 -- AUTO_INCREMENT for table `laptop`
@@ -236,22 +313,34 @@ ALTER TABLE `laptop`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
+-- AUTO_INCREMENT for table `order_history`
+--
+ALTER TABLE `order_history`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
+
+--
 -- AUTO_INCREMENT for table `phone`
 --
 ALTER TABLE `phone`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=506;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=505;
+
+--
+-- AUTO_INCREMENT for table `signup`
+--
+ALTER TABLE `signup`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tab`
 --
 ALTER TABLE `tab`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=606;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=605;
 
 --
 -- AUTO_INCREMENT for table `tv`
 --
 ALTER TABLE `tv`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1006;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1005;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

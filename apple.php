@@ -20,6 +20,16 @@
 </style>
 </head>
 <body>
+    <?php
+session_start();
+
+if (isset($_SESSION['user_name']) )
+{ 
+    $name = $_SESSION['user_name'];
+
+}
+
+?>
    <div class="d-flex" id="wrapper">
 
     <!-- Sidebar -->
@@ -103,7 +113,21 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+
+            <?php
+              if(isset($name)){
+               ?>
+                   <li class="nav-item">
+              <a class="nav-link" href=""><?php echo $name; ?> </a>
+            </li>
             <li class="nav-item">
+              <a class="nav-link" href="logout.php">Logout</a>
+            </li>
+               <?php
+              }
+              else{
+                ?>
+                 <li class="nav-item">
               <a class="nav-link" href="index.php">Home </a>
             </li>
             <li class="nav-item">
@@ -112,6 +136,11 @@
             <li class="nav-item">
               <a class="nav-link" href="signup.php">Signup</a>
             </li>
+                <?php
+              }
+
+            ?>
+           
           </ul>
         </div>
       </nav>

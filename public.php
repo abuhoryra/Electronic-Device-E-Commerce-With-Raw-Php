@@ -20,7 +20,28 @@
 </style>
 </head>
 <body>
+	 <?php
+	 ob_start();
+    session_start();
+   
+    
+    
+    $username = $_SESSION['user_name'];
+    $usertype = $_SESSION['user_type'];
 
+
+ 
+    
+    if($username == true && $usertype == 'public'){
+        
+    }
+    
+  
+    else{
+        header("location: login.php");
+    }
+
+?>
 	 <div class="d-flex" id="wrapper">
 
     <!-- Sidebar -->
@@ -116,7 +137,7 @@
 <!-- Modal -->
 <div class="modal fade" id="exampleModal7" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
-    <div class="modal-content"  style="width: 700px !important;">
+    <div class="modal-content"  style="width: 900px !important;">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Cart</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -145,11 +166,12 @@
        $count++;
    ?>
     <tr>
+    	<form method="post">
     <td><?php echo $count ?></td>
-     <td><?php echo $values["item_name"]; ?></td>
-     <td><?php echo $values["item_quantity"]; ?></td>
-     <td> <?php echo $values["item_price"]; ?> Tk.</td>
-     <td> <?php echo number_format($values["item_quantity"] * $values["item_price"], 2);?> Tk.</td>
+     <td><input type="text" style="border: none;" name="item_name" value="<?php echo $values["item_name"]; ?>" readonly></td>
+     <td><input type="number" style="border: none;" name="item_quantity" value="<?php echo $values["item_quantity"]; ?>" readonly></td>
+     <td><?php echo $values["item_price"]; ?> Tk.</td>
+     <td><input type="text" name="price" style="border: none;" value="<?php echo number_format($values["item_quantity"] * $values["item_price"], 2);?>" readonly>Tk.</td>
      <td><a href="add_cart.php?action=delete&id=<?php echo $values["item_id"]; ?>"><span class="text-danger">Remove</span></a></td>
     </tr>
    <?php 
@@ -169,6 +191,15 @@
 
      ?> </td>
     </tr>
+    <tr>
+    	<td colspan="6" style="text-align: center;">
+    	<button type="submit" name="checkout" class="btn btn-success">Checkout</button>
+    	</td>
+    </tr>
+  
+    
+
+    </form>
    <?php
    }
    else
@@ -190,10 +221,10 @@
 </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="login.php">Login</a>
+              <a class="nav-link" href=""><?php echo $_SESSION['user_name']; ?></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="signup.php">Signup</a>
+              <a class="nav-link" href="logout.php">Logout</a>
             </li>
           </ul>
         </div>
@@ -202,7 +233,30 @@
     <style type="text/css">
 
     </style> 
+<?php
+include_once("connection.php");
 
+ if(isset($_POST['checkout'])){
+      
+       $order_number = substr(number_format(time() * rand(),0,'',''),0,6);
+      $user = $_SESSION['user_name'];
+      $user_add = $_SESSION['address_data'];
+      $user_phone = $_SESSION['user_phone'];
+      $date = date('Y-m-d H:i:s');
+      $pro_data = json_decode($cookie_data, true);
+       foreach($pro_data as $keys => $values){
+         $item = $values['item_name'];
+         $quantity = $values['item_quantity'];
+         $price = $values['item_price'] * $quantity;
+
+         $cql = "INSERT INTO order_history(order_number,username,item,quantity,price,address,phone,date_time)VALUES('$order_number','$user','$item','$quantity','$price','$user_add','$user_phone',NOW())";
+ 	     $result = mysqli_query($conn,$cql);
+ 	    setcookie("shopping_cart", "", time() - 3600);
+         header("location:public.php?clearall=1");
+         }
+}
+
+?>
 
 
 <div class="container-fluid" style="margin-top: 1%;">

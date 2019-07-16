@@ -23,7 +23,7 @@
 
  
     
-    if($username == true && $usertype == true){
+    if($username == true && $usertype == 'admin'){
         
     }
     

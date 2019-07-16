@@ -21,8 +21,6 @@
             </div>
 
             <form method="post" action="">
-
-
             <div class="form-group">
         <input type="text" id="name" name="firstname" class="form-control"  required>
         <label class="form-control-placeholder" for="name">Firstname</label>
@@ -47,9 +45,21 @@
         <input type="password" id="password" name="password" class="form-control" required >
         <label class="form-control-placeholder" for="password">Password</label>
       </div>
+      <div class="form-group">
+        <input type="text" id="address" name="address" class="form-control" required >
+        <label class="form-control-placeholder" for="address">Address</label>
+      </div>
+      <div class="form-group">
+        <input type="number" id="phone" name="phone" class="form-control" required >
+        <label class="form-control-placeholder" for="phone">Phone</label>
+      </div>
+      <div class="form-group">
+        <input type="text" id="zipcode" name="zipcode" class="form-control" required >
+        <label class="form-control-placeholder" for="zipcode">Zipcode</label>
+      </div>
 
              <div class="bt">
-                <button type="submit" class="btn btn-success">Signup</button>  
+                <button type="submit" name="submit" class="btn btn-success">Signup</button>  
              </div>
              </form>
        <h5 style="float: right; margin-top:15px;">Already registered? <a href="login.php">Login</a></h5>
@@ -58,7 +68,30 @@
         </div>
     </div>
 </div>
+<?php
 
+include_once('connection.php');
+
+if(isset($_POST['submit'])){
+
+  $first_name = $_POST['firstname'];
+  $last_name = $_POST['lastname'];
+  $username = $_POST['username'];
+  $email = $_POST['email'];
+  $password = password_hash($_POST['password'],PASSWORD_DEFAULT);
+  $address = $_POST['address'];
+  $phone = $_POST['phone'];
+  $zipcode = $_POST['zipcode'];
+
+  $sql = "INSERT INTO signup(first_name,last_name,username,email,password,address,phone,zipcode,type) VALUES('$first_name','$last_name','$username','$email','$password','$address','$phone','$zipcode','public')";
+  $res = mysqli_query($conn,$sql);
+
+
+}
+
+
+
+?>
 
 
 </body>
