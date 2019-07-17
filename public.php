@@ -251,7 +251,28 @@ include_once("connection.php");
 
          $cql = "INSERT INTO order_history(order_number,username,item,quantity,price,address,phone,date_time)VALUES('$order_number','$user','$item','$quantity','$price','$user_add','$user_phone',NOW())";
  	     $result = mysqli_query($conn,$cql);
- 	    setcookie("shopping_cart", "", time() - 3600);
+
+
+ 	     try{
+ $soapClient = new SoapClient("https://api2.onnorokomSMS.com/sendSMS.asmx?wsdl");
+ $paramArray = array(
+ 'userName' => "01629710423",
+ 'userPassword' => "pranto224466",
+ 'mobileNumber' => "$user_phone",
+ 'smsText' => "Your $item Order Placed Successfully.Your Order Number is $order_number",
+ 'type' => "TEXT",
+ 'maskName' => '',
+ 'campaignName' => '',
+ );
+ 
+ $value = $soapClient->__call("OneToOne", array($paramArray));
+ print_r($value->OneToOneResult);
+} 
+catch (Exception $e) {
+ print_r($e->getMessage());
+}
+
+ 	     setcookie("shopping_cart", "", time() - 3600);
          header("location:public.php?clearall=1");
          }
 }
