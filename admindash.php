@@ -77,6 +77,7 @@
 </div>
 <br>
 <a href="adminpasswordchange.php" style="font-size: 18px;">Password Change</a>
+<a href="order_history.php" style="font-size: 18px;">Order History</a>
 </div>
 </body>
 </html>
