@@ -34,4 +34,11 @@ if(isset($_GET['delete'])){
         $result = mysqli_query($conn,$dql);
         header('Location: ' . $_SERVER['HTTP_REFERER']);
     }
+if(isset($_GET['shipment'])){
+         
+        $tql = "UPDATE order_history SET shipment = 1 WHERE order_number = '{$_GET['order_number']}' AND type=1";
+        $tim = mysqli_query($conn,$tql);
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+    }
+
 ?>

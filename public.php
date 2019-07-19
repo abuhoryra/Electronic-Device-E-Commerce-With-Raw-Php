@@ -249,13 +249,14 @@ include_once("connection.php");
          $quantity = $values['item_quantity'];
          $price = $values['item_price'] * $quantity;
 
-         $cql = "INSERT INTO order_history(order_number,username,item,quantity,price,address,phone,date_time,type)VALUES('$order_number','$user','$item','$quantity','$price','$user_add','$user_phone',NOW(),0)";
+         $cql = "INSERT INTO order_history(order_number,username,item,quantity,price,address,phone,date_time,type,shipment)VALUES('$order_number','$user','$item','$quantity','$price','$user_add','$user_phone',NOW(),0,0)";
  	     $result = mysqli_query($conn,$cql);
 
 
  	     setcookie("shopping_cart", "", time() - 3600);
          header("location:public.php?clearall=1");
          }
+         
 	     try{
  $soapClient = new SoapClient("https://api2.onnorokomSMS.com/sendSMS.asmx?wsdl");
  $paramArray = array(
@@ -274,6 +275,7 @@ include_once("connection.php");
 catch (Exception $e) {
  print_r($e->getMessage());
 }
+	
 
  
 }

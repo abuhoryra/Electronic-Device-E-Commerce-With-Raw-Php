@@ -53,7 +53,7 @@
 
       include_once("connection.php");
 
-      $sql = "SELECT * FROM order_history";
+      $sql = "SELECT * FROM order_history WHERE shipment=0";
       $res = mysqli_query($conn,$sql);
       $count = 0;
       while($row = mysqli_fetch_array($res)){
@@ -79,7 +79,9 @@
         }
 
         else{
-        echo "Print";
+        ?>
+              <a href="pdf.php?print=1&order_number=<?php echo $row['order_number']; ?>" class="btn btn-danger btn-sm" href="">Print</a>
+        <?php
       }
 
         ?>
