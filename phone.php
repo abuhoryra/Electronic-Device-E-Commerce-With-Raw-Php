@@ -49,7 +49,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Laptop</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Add Phone</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -64,7 +64,7 @@
     <option selected>Choose...</option>
     <option value="iPhone">iPhone</option>
     <option value="Samsung">Samsung</option>
-    <option value="Huawei">Accer</option>
+    <option value="Huawei">Huawei</option>
     <option value="Xiomi">Xiomi</option>
     <option value="OnePlus">OnePlus</option>
   </select>

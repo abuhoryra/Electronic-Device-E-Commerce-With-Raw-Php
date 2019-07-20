@@ -168,10 +168,10 @@
     <tr>
     	<form method="post">
     <td><?php echo $count ?></td>
-     <td><input type="text" style="border: none;" name="item_name" value="<?php echo $values["item_name"]; ?>" readonly></td>
-     <td><input type="number" style="border: none;" name="item_quantity" value="<?php echo $values["item_quantity"]; ?>" readonly></td>
+     <td><?php echo $values["item_name"]; ?></td>
+     <td><?php echo $values["item_quantity"]; ?></td>
      <td><?php echo $values["item_price"]; ?> Tk.</td>
-     <td><input type="text" name="price" style="border: none;" value="<?php echo number_format($values["item_quantity"] * $values["item_price"], 2);?>" readonly>Tk.</td>
+     <td><?php echo number_format($values["item_quantity"] * $values["item_price"], 2);?> Tk.</td>
      <td><a href="add_cart.php?action=delete&id=<?php echo $values["item_id"]; ?>"><span class="text-danger">Remove</span></a></td>
     </tr>
    <?php 
@@ -230,15 +230,12 @@
         </div>
       </nav>
 
-    <style type="text/css">
-
-    </style> 
 <?php
 include_once("connection.php");
 
  if(isset($_POST['checkout'])){
       
-       $order_number = substr(number_format(time() * rand(),0,'',''),0,6);
+      $order_number = substr(number_format(time() * rand(),0,'',''),0,6);
       $user = $_SESSION['user_name'];
       $user_add = $_SESSION['address_data'];
       $user_phone = $_SESSION['user_phone'];
@@ -250,20 +247,21 @@ include_once("connection.php");
          $price = $values['item_price'] * $quantity;
 
          $cql = "INSERT INTO order_history(order_number,username,item,quantity,price,address,phone,date_time,type,shipment)VALUES('$order_number','$user','$item','$quantity','$price','$user_add','$user_phone',NOW(),0,0)";
- 	     $result = mysqli_query($conn,$cql);
 
+ 	       $result = mysqli_query($conn,$cql);
 
- 	     setcookie("shopping_cart", "", time() - 3600);
-         header("location:public.php?clearall=1");
-         }
-         
-	     try{
+ 	       setcookie("shopping_cart", "", time() - 3600);
+         header('Location: ' . $_SERVER['HTTP_REFERER']);
+
+       }
+
+            try{
  $soapClient = new SoapClient("https://api2.onnorokomSMS.com/sendSMS.asmx?wsdl");
  $paramArray = array(
  'userName' => "01629710423",
  'userPassword' => "pranto224466",
  'mobileNumber' => "$user_phone",
- 'smsText' => "Your Order Placed Successfully.Your Order Number is $order_number",
+ 'smsText' => "Your Order Placed Successfully.Your Order Number is $order_number ---BuyTech",
  'type' => "TEXT",
  'maskName' => '',
  'campaignName' => '',
@@ -275,7 +273,9 @@ include_once("connection.php");
 catch (Exception $e) {
  print_r($e->getMessage());
 }
-	
+
+        
+
 
  
 }

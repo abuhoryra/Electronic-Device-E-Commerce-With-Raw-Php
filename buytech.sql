@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 17, 2019 at 12:16 AM
+-- Generation Time: Jul 20, 2019 at 11:27 PM
 -- Server version: 10.1.32-MariaDB
 -- PHP Version: 7.2.5
 
@@ -93,7 +93,8 @@ INSERT INTO `laptop` (`id`, `brand`, `name`, `des`, `stock`, `price`, `img_name`
 (40, 'Hp', 'Specture X360', 'One of the best', 10, 120000, '15606237069996877595d053a5a473ab.jpg'),
 (41, 'Dell', 'XPS 13', 'Best For Student', 12, 130000, '15606237373473232495d053a79eb5c7.jpg'),
 (42, 'Assus', 'ROG', 'Best for gamming', 5, 110000, '15606239528182245035d053b50b9199.jpg'),
-(43, 'Accer', 'Nitro', 'Best for gamming', 4, 700000, '15606239856416007435d053b714e185.jpg');
+(43, 'Accer', 'Nitro', 'Best for gamming', 4, 700000, '15606239856416007435d053b714e185.jpg'),
+(44, 'Lenevo', 'Lenevo Yoga', 'good', 12, 90000, '156365298319756992095d3373778f2c7.jpg');
 
 -- --------------------------------------------------------
 
@@ -110,27 +111,10 @@ CREATE TABLE `order_history` (
   `price` varchar(255) NOT NULL,
   `address` varchar(255) NOT NULL,
   `phone` int(30) NOT NULL,
-  `date_time` datetime NOT NULL
+  `date_time` datetime NOT NULL,
+  `type` int(11) NOT NULL,
+  `shipment` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `order_history`
---
-
-INSERT INTO `order_history` (`id`, `order_number`, `username`, `item`, `quantity`, `price`, `address`, `phone`, `date_time`) VALUES
-(101, 332196, 'pranto', 'XPS 13', 1, '130000', 'Bashundhara Residential Area', 0, '0000-00-00 00:00:00'),
-(102, 332196, 'pranto', 'Specture X360', 1, '120000', 'Bashundhara Residential Area', 0, '0000-00-00 00:00:00'),
-(103, 176682, 'pranto', 'XPS 13', 1, '130000', 'Bashundhara Residential Area', 0, '0000-00-00 00:00:00'),
-(104, 109942, 'pranto', 'XPS 13', 1, '130000', 'Bashundhara Residential Area', 1629710423, '0000-00-00 00:00:00'),
-(105, 317752, 'pranto', 'XPS 13', 1, '130000', 'Bashundhara Residential Area', 1629710423, '0000-00-00 00:00:00'),
-(106, 105799, 'pranto', 'Samsung Galaxy S10', 1, '100000', 'Bashundhara Residential Area', 1629710423, '0000-00-00 00:00:00'),
-(107, 315902, 'pranto', 'Samsung Galaxy S10', 1, '100000', 'Bashundhara Residential Area', 1629710423, '0000-00-00 00:00:00'),
-(108, 173076, 'pranto', 'Specture X360', 1, '120000', 'Bashundhara Residential Area', 1629710423, '2019-07-17 00:12:56'),
-(109, 291463, 'pranto', 'Specture X360', 1, '120000', 'Bashundhara Residential Area', 1629710423, '2019-07-17 03:57:52'),
-(110, 291463, 'pranto', 'XPS 13', 1, '130000', 'Bashundhara Residential Area', 1629710423, '2019-07-17 03:57:52'),
-(111, 291463, 'pranto', 'MacBook Pro 2019', 1, '1550000', 'Bashundhara Residential Area', 1629710423, '2019-07-17 03:57:52'),
-(112, 296818, 'pranto', 'XPS 13', 1, '130000', 'Bashundhara Residential Area', 1629710423, '2019-07-17 04:13:46'),
-(113, 177986, 'shakib', 'XPS 13', 1, '130000', 'Bashundhara R/A', 1732533232, '2019-07-17 04:14:44');
 
 -- --------------------------------------------------------
 
@@ -156,7 +140,8 @@ INSERT INTO `phone` (`id`, `brand`, `name`, `des`, `stock`, `price`, `img_name`)
 (501, 'iPhone', 'iPhone XS', 'Best Phone Ever', 10, 130000, '15611505931528133495d0d44815f741.jpg'),
 (502, 'Samsung', 'Samsung Galaxy S10', 'Best Phone Ever', 12, 100000, '1561150655765186195d0d44bf750ed.jpg'),
 (503, 'Xiomi', 'Mi9', 'Best Phone Ever', 3, 30000, '156115069317523093125d0d44e50f02f.jpg'),
-(504, 'OnePlus', 'OnePlus 7 Pro', 'Best Phone Ever', 5, 70000, '15611503165362008025d0d436c6cbcf.jpg');
+(504, 'OnePlus', 'OnePlus 7 Pro', 'Best Phone Ever', 5, 70000, '15611503165362008025d0d436c6cbcf.jpg'),
+(505, 'Huawei', 'Huawei P30 Pro', 'good', 3, 80000, '156365547319688007285d337d312f016.jpg');
 
 -- --------------------------------------------------------
 
@@ -310,19 +295,19 @@ ALTER TABLE `game`
 -- AUTO_INCREMENT for table `laptop`
 --
 ALTER TABLE `laptop`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `order_history`
 --
 ALTER TABLE `order_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=230;
 
 --
 -- AUTO_INCREMENT for table `phone`
 --
 ALTER TABLE `phone`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=505;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=506;
 
 --
 -- AUTO_INCREMENT for table `signup`
