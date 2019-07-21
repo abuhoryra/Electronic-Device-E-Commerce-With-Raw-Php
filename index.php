@@ -16,6 +16,10 @@
     font-family: 'Vollkorn', serif;
     color: #0099ff;
   }
+ .modal-body {
+   
+   overflow: auto;
+}
 </style>
 </head>
 <body>

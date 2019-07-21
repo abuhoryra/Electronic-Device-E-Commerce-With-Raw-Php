@@ -50,7 +50,7 @@
             $pass = $_POST['password'];
            
             
-            $sql = "SELECT id,username,password,type,address,phone FROM signup
+            $sql = "SELECT id,username,password,type,address,phone,card FROM signup
                            WHERE username='$user'";
             
             $res = mysqli_query($conn,$sql);

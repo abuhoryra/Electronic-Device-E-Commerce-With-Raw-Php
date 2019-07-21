@@ -84,7 +84,43 @@ if(isset($_POST['submit'])){
   $zipcode = $_POST['zipcode'];
 
   $sql = "INSERT INTO signup(first_name,last_name,username,email,password,address,phone,zipcode,type) VALUES('$first_name','$last_name','$username','$email','$password','$address','$phone','$zipcode','public')";
-  $res = mysqli_query($conn,$sql);
+  
+
+
+
+
+
+  if(empty($first_name) || empty($last_name) || empty($username) || empty($email) || empty($password) || empty($address) || empty($phone) || empty($zipcode))
+  {
+                echo"<script>swal({
+                    title: 'Fill Up All Field',
+                    text: 'Thank You',
+                    icon: 'error',
+                    timer: 3000,
+                    button: false,
+                });</script>";
+            }
+           elseif(!$res = mysqli_query($conn,$sql)){
+                echo"<script>swal({
+                    title: 'Enter Another Username, Email Or Phone Number',
+                    text: 'Thank You',
+                    icon: 'error',
+                    timer: 3000,
+                    button: false,
+                });</script>";
+            }
+            else{
+                $res = mysqli_query($conn,$sql);
+               
+              
+                echo"<script>swal({
+                    title: 'Your Information Added Successfully',
+                    text: 'Thank You',
+                    icon: 'success',
+                    timer: 3000,
+                    button: false,
+                });</script>";
+            }
 
 
 }

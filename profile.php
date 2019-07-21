@@ -24,17 +24,29 @@
 </style>
 </head>
 <body>
-    <?php
-session_start();
+	 <?php
+	 ob_start();
+    session_start();
+   
+    
+    
+    $username = $_SESSION['user_name'];
+    $usertype = $_SESSION['user_type'];
 
-if (isset($_SESSION['user_name']) )
-{ 
-    $name = $_SESSION['user_name'];
 
-}
+ 
+    
+    if($username == true && $usertype == 'public'){
+        
+    }
+    
+  
+    else{
+        header("location: login.php");
+    }
 
 ?>
-   <div class="d-flex" id="wrapper">
+	 <div class="d-flex" id="wrapper">
 
     <!-- Sidebar -->
     <div class="bg-dark border-right" id="sidebar-wrapper">
@@ -117,8 +129,10 @@ if (isset($_SESSION['user_name']) )
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-        
-      <li class="nav-item">
+            <li class="nav-item">
+              <a class="nav-link" href="index.php">Home </a>
+            </li>
+            <li class="nav-item">
               <!-- Button trigger modal -->
 <a href="" class="nav-link" data-toggle="modal" data-target="#exampleModal7">
   Cart
@@ -156,29 +170,20 @@ if (isset($_SESSION['user_name']) )
        $count++;
    ?>
     <tr>
-      <form method="post">
+    	<form method="post">
     <td><?php echo $count ?></td>
      <td><?php echo $values["item_name"]; ?></td>
      <td><?php echo $values["item_quantity"]; ?></td>
-     <td> <?php echo $values["item_price"]; ?> Tk.</td>
-     <td> <?php echo number_format($values["item_quantity"] * $values["item_price"], 2);?> Tk.</td>
+     <td><?php echo $values["item_price"]; ?> Tk.</td>
+     <td><?php echo number_format($values["item_quantity"] * $values["item_price"], 2);?> Tk.</td>
      <td><a href="add_cart.php?action=delete&id=<?php echo $values["item_id"]; ?>"><span class="text-danger">Remove</span></a></td>
     </tr>
    <?php 
      $total = $total + ($values["item_quantity"] * $values["item_price"]);
     }
    ?>
-   <?php
-
-       if($count == 0){
-        echo 'No Items in Cart';
-
-       }
-
-       else{
-        ?>
-        <tr>
-              <td colspan="4" align="right">Total</td>
+    <tr>
+     <td colspan="4" align="right">Total</td>
      <td align="right">$ <?php echo number_format($total, 2); ?></td>
      <td> <?php
        
@@ -190,72 +195,15 @@ if (isset($_SESSION['user_name']) )
 
      ?> </td>
     </tr>
-        <?php
-       }
-
-   ?>
-      
-
-    <?php
-         
-         if(isset($name)){
-          ?>
-        
-      <?php
-
-      if($count == 0){
-        echo '';
-      }
-
-      else{
-        ?>
-      
-      <tr>
-      <td colspan="6" style="">
-       <div class="radio">
-  <label style="color: green;"><input type="radio" name="payment" value="cash on delivery" checked> Cash on delivery</label>
-</div>
-<?php 
-
-    include_once("connection.php");
-      $user = $_SESSION['user_name'];
-    $fql = "SELECT card FROM signup WHERE username = '$user'";
-    $hql = mysqli_query($conn,$fql);
-    $count=mysqli_num_rows($hql);
-    $record = mysqli_fetch_assoc($hql); 
-
-   
-   if($record['card'] == 0){
-    echo 'No Card Added';
-   }
-   else{
-    ?>
-     <div class="radio">
-  <label style="color: green;"><input type="radio" name="payment" value="<?php echo $record['card']; ?>"> Card</label>
-</div>
-    <?php
-   }
-
-?>
-    
-  </td>
-    </tr>
     <tr>
-      <td colspan="6" style="text-align: center;">
-      <button type="submit" name="checkout" class="btn btn-success">Checkout</button>
-      </td>
+    	<td colspan="6" style="text-align: center;">
+    	<button type="submit" name="checkout" class="btn btn-success">Checkout</button>
+    	</td>
     </tr>
-        <?php
-      }
-
-      ?>
-          <?php
-         }
-
-    ?>
+  
     
-  </form>
 
+    </form>
    <?php
    }
    else
@@ -276,41 +224,17 @@ if (isset($_SESSION['user_name']) )
   </div>
 </div>
             </li>
-
-
-
-            <?php
-              if(isset($name)){
-               ?>
-                   <li class="nav-item">
-              <a class="nav-link" href="profile.php"><?php echo $name; ?> </a>
+            <li class="nav-item">
+              <a class="nav-link" href=""><?php echo $_SESSION['user_name']; ?></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="logout.php">Logout</a>
             </li>
-               <?php
-              }
-              else{
-                ?>
-                 <li class="nav-item">
-              <a class="nav-link" href="index.php">Home </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="login.php">Login</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="signup.php">Signup</a>
-            </li>
-                <?php
-              }
-
-            ?>
-           
           </ul>
         </div>
       </nav>
 
-  <?php
+<?php
 include_once("connection.php");
 
  if(isset($_POST['checkout'])){
@@ -320,23 +244,22 @@ include_once("connection.php");
       $user_add = $_SESSION['address_data'];
       $user_phone = $_SESSION['user_phone'];
       $date = date('Y-m-d H:i:s');
-      $payment = $_POST['payment'];
       $pro_data = json_decode($cookie_data, true);
        foreach($pro_data as $keys => $values){
          $item = $values['item_name'];
          $quantity = $values['item_quantity'];
          $price = $values['item_price'] * $quantity;
 
-         $cql = "INSERT INTO order_history(order_number,username,item,quantity,price,address,phone,date_time,type,shipment,payment)VALUES('$order_number','$user','$item','$quantity','$price','$user_add','$user_phone',NOW(),0,0,'$payment')";
+         $cql = "INSERT INTO order_history(order_number,username,item,quantity,price,address,phone,date_time,type,shipment)VALUES('$order_number','$user','$item','$quantity','$price','$user_add','$user_phone',NOW(),0,0)";
 
-         $result = mysqli_query($conn,$cql);
+ 	       $result = mysqli_query($conn,$cql);
 
-         setcookie("shopping_cart", "", time() - 3600);
+ 	       setcookie("shopping_cart", "", time() - 3600);
          header('Location: ' . $_SERVER['HTTP_REFERER']);
 
        }
-        
-        try{
+
+            try{
  $soapClient = new SoapClient("https://api2.onnorokomSMS.com/sendSMS.asmx?wsdl");
  $paramArray = array(
  'userName' => "01629710423",
@@ -355,110 +278,170 @@ catch (Exception $e) {
  print_r($e->getMessage());
 }
 
+        
+
+
  
 }
 
 ?>
-   
-
 
 
 <div class="container-fluid" style="margin-top: 1%;">
-  <h1 style="text-align: center;">Samsung</h1>
-  <hr>
-  <div class="card-deck">
 
-    <?php
-    include_once("connection.php");
-      $rom="SELECT * FROM phone WHERE brand = 'Samsung'";
-      $rim = mysqli_query($conn,$rom);
-      
-      while ($res = mysqli_fetch_array($rim)) {
-    
-       ?>
-         <div class="col-lg-3 col-md-6 col-12">
-          <br>
-       <div class="card" style="">
-        <div class="hovereffect">
-        <img class="card-img-top" style="height: 250px;" src="item/<?php echo $res['img_name'] ?>">
-         <div class="overlay">
-           <form method="post" action="add_cart.php">
-       <input type="hidden" name="quantity" value="1" class="form-control" />
-      <input type="hidden" name="hidden_name" value="<?php echo $res["name"]; ?>" />
-      <input type="hidden" name="hidden_price" value="<?php echo $res["price"]; ?>" />
-      <input type="hidden" name="hidden_id" value="<?php echo $res["id"]; ?>" />
-           <button type="submit" name="add_to_cart" class="info">Add Cart</button>
-           </form>
-        </div>
-    </div>
-      <div class="card-body">
+  <div class="row">
+    <div class="col-md-4" style="border-right: 2px solid grey;">
 
-        <p><?php echo $res['name']; ?><span style="float: right; color: salmon;"><?php echo $res['price'].' Tk.'; ?></span></p> 
-        <p>Stock: <span style="color: red;"><?php echo $res['stock']; ?> </span><span style="float: right;"><a style="float: right;" href="" class="" data-toggle="modal" data-target="#exampleModalCenter1<?php echo $res['id'];?>">
-  View More
-</a></span></p> 
+      <h3 style="text-align: center;">Edit Info</h3>
+      <br>
+ 
+ <?php
+
+ include_once("connection.php");
+
+ $user = $_SESSION['user_name'];
+
+ $sql = "SELECT * FROM signup WHERE username = '$user'";
+ $rim = mysqli_query($conn,$sql);
+
+ while($res = mysqli_fetch_array($rim)){
+ ?>
+ <form method="post">
+ <div class="form-group">
+  <label for="usr">First Name:</label>
+  <input type="text" name="first_name" class="form-control" id="usr" value="<?php echo $res['first_name']; ?>" required>
+</div>
+<div class="form-group">
+  <label for="usr">Last Name:</label>
+  <input type="text" name="last_name" class="form-control" id="usr" value="<?php echo $res['last_name']; ?>" required>
+</div>
+<div class="form-group">
+  <label for="usr">Phonee:</label>
+  <input type="text" name="phone" class="form-control" id="usr" value="<?php echo $res['phone']; ?>" required>
+</div>
+<div class="form-group">
+  <label for="usr">Address:</label>
+  <input type="text" name="address" class="form-control" id="usr" value="<?php echo $res['address']; ?>" required>
+</div>
+<div class="form-group">
+  <label for="usr">Zipcode:</label>
+  <input type="text" name="zipcode" class="form-control" id="usr" value="<?php echo $res['zipcode']; ?>" required>
+</div>
+<div class="form-group">
+  <label for="usr">Card:</label>
+  <input type="number" name="card" class="form-control" id="usr" value="<?php echo $res['card']; ?>">
+</div>
+<div style="text-align: center;">
+  <button type="submit" name="upu" class="btn btn-success btn-sm">Update</button>
+</div>
+</form>
+ <?php
+}
+
+ ?>
+ </div>
+ <?php
+  
+  include_once("connection.php");
+
+  $user = $_SESSION['user_name'];
+
+  if(isset($_POST['upu'])){
+
+  $first_name = $_POST['first_name'];
+  $last_name = $_POST['last_name'];
+  $phone = $_POST['phone'];
+  $address = $_POST['address'];
+  $zipcode = $_POST['zipcode'];
+  $card = $_POST['card'];
+
+  $uql = "UPDATE signup
+          SET first_name = '$first_name', last_name= '$last_name', phone = '$phone', address = '$address', zipcode = '$zipcode', card = '$card'
+          WHERE username = '$user'";
+  $rql = mysqli_query($conn,$uql);
+  header('Location: ' . $_SERVER['HTTP_REFERER']);
+
+}
 
 
+ ?>
+ <div class="col-md-8">
 
-        <!-- Button trigger modal -->
+  <h3 style="text-align: center;">My Order History</h3>
+  <br>
+   <table class="table table-hover table-bordered">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Order Number</th>
+        <th>Item</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Status</th>
+        <th>Date/Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php
 
+        include_once("connection.php");
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModalCenter1<?php echo $res['id']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle"><?php echo $res['name'];?></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-       <?php
-       include_once("connection.php");
-       $id = $res['id'];
-      $rkm="SELECT * FROM laptop WHERE id = '$id'";
-      $rtm = mysqli_query($conn,$rkm);
-      
-      while ($result = mysqli_fetch_array($rtm)) { 
+        $user = $_SESSION['user_name'];
+        $count = 0;
+
+        $oql = "SELECT * FROM order_history WHERE username = '$user'";
+        $tql = mysqli_query($conn,$oql);
+
+        while($result = mysqli_fetch_array($tql)){
+        $count++;
         ?>
-        <div style="text-align: center;">
-        <img class="img-responsive" style="height: 150px;" src="item/<?php echo $res['img_name'] ?>">
+        <tr>
+        <td><?php echo $count; ?></td>
+        <td><?php echo $result['order_number']; ?></td>
+        <td><?php echo $result['item']; ?></td>
+        <td><?php echo $result['quantity']; ?></td>
+        <td><?php echo $result['price']; ?></td>
+        <td>
+          <?php 
+          if($result['type'] == 0){
+          ?>
+          <div class="alert-primary" style="padding: 2px 5px; border-radius: 5px;" role="alert">
+            Order Placed
+          </div>
+          <?php
+        }
+
+        elseif($result['type'] == 1 && $result['shipment'] == 0){
+        ?>
+        <div class="alert-success" style="padding: 2px 5px; border-radius: 5px;" role="alert">
+          Order Confirm
         </div>
-        <br>
-        <p><span style="color: #00cc99;">Brand: </span> <?php echo $result['brand'];?></p>
-        <p><span style="color: #00cc99;">Name: </span> <?php echo $result['name'];?></p>
-        <p><span style="color: #00cc99;">Description: </span> <?php echo $result['des'];?></p>
+        <?php
+      }
+      elseif($result['shipment'] == 1){
+        ?>
+        <div class="alert-info" style="padding: 2px 5px; border-radius: 5px;" role="alert">
+          Shiping
+        </div>
+        <?php
+      }
+          ?>
+            
+          </td>
+          <td><?php echo $result['date_time']; ?></td>
         <?php
       }
 
-       ?>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
+
+
+      ?>
       
-
+      </tr>
+      
+    </tbody>
+  </table>
+ </div>
 </div>
-   
-
-
-
-  </div>
-  </div>
-
-       <?php
-     
-}
-  ?>
-
-</div>
-
-
-
   </div>
     <!-- /#page-content-wrapper -->
 
@@ -473,6 +456,7 @@ catch (Exception $e) {
       $("#wrapper").toggleClass("toggled");
     });
   </script>
+
   </div>
 </body>
 </html>

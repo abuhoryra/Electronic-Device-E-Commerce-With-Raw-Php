@@ -9,8 +9,6 @@
   <link href="https://fonts.googleapis.com/css?family=Vollkorn&display=swap" rel="stylesheet">
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Custom styles for this template -->
   <link href="css/simple-sidebar.css" rel="stylesheet">
   <link href="css/cart.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -19,10 +17,14 @@
     font-family: 'Vollkorn', serif;
     color: #0099ff;
   }
+   .modal-body {
+   
+   overflow: auto;
+}
 </style>
 </head>
 <body>
-      <?php
+    <?php
 session_start();
 
 if (isset($_SESSION['user_name']) )
@@ -115,8 +117,8 @@ if (isset($_SESSION['user_name']) )
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-
-            <li class="nav-item">
+        
+      <li class="nav-item">
               <!-- Button trigger modal -->
 <a href="" class="nav-link" data-toggle="modal" data-target="#exampleModal7">
   Cart
@@ -125,7 +127,7 @@ if (isset($_SESSION['user_name']) )
 <!-- Modal -->
 <div class="modal fade" id="exampleModal7" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
-    <div class="modal-content"  style="width: 700px !important;">
+    <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Cart</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -166,8 +168,17 @@ if (isset($_SESSION['user_name']) )
      $total = $total + ($values["item_quantity"] * $values["item_price"]);
     }
    ?>
-    <tr>
-     <td colspan="4" align="right">Total</td>
+   <?php
+
+       if($count == 0){
+        echo 'No Items in Cart';
+
+       }
+
+       else{
+        ?>
+        <tr>
+              <td colspan="4" align="right">Total</td>
      <td align="right">$ <?php echo number_format($total, 2); ?></td>
      <td> <?php
        
@@ -179,16 +190,65 @@ if (isset($_SESSION['user_name']) )
 
      ?> </td>
     </tr>
+        <?php
+       }
+
+   ?>
+      
 
     <?php
          
          if(isset($name)){
           ?>
-           <tr>
+        
+      <?php
+
+      if($count == 0){
+        echo '';
+      }
+
+      else{
+        ?>
+      
+      <tr>
+      <td colspan="6" style="">
+       <div class="radio">
+  <label style="color: green;"><input type="radio" name="payment" value="cash on delivery" checked> Cash on delivery</label>
+</div>
+<?php 
+
+    include_once("connection.php");
+      $user = $_SESSION['user_name'];
+    $fql = "SELECT card FROM signup WHERE username = '$user'";
+    $hql = mysqli_query($conn,$fql);
+    $count=mysqli_num_rows($hql);
+    $record = mysqli_fetch_assoc($hql); 
+
+   
+   if($record['card'] == 0){
+    echo 'No Card Added';
+   }
+   else{
+    ?>
+     <div class="radio">
+  <label style="color: green;"><input type="radio" name="payment" value="<?php echo $record['card']; ?>"> Card</label>
+</div>
+    <?php
+   }
+
+?>
+    
+  </td>
+    </tr>
+    <tr>
       <td colspan="6" style="text-align: center;">
       <button type="submit" name="checkout" class="btn btn-success">Checkout</button>
       </td>
     </tr>
+        <?php
+      }
+
+      ?>
           <?php
          }
 
@@ -217,12 +277,13 @@ if (isset($_SESSION['user_name']) )
 </div>
             </li>
 
-            
+
+
             <?php
               if(isset($name)){
                ?>
                    <li class="nav-item">
-              <a class="nav-link" href=""><?php echo $name; ?> </a>
+              <a class="nav-link" href="profile.php"><?php echo $name; ?> </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="logout.php">Logout</a>
@@ -244,11 +305,11 @@ if (isset($_SESSION['user_name']) )
               }
 
             ?>
+           
           </ul>
         </div>
       </nav>
 
-     
   <?php
 include_once("connection.php");
 
@@ -259,13 +320,14 @@ include_once("connection.php");
       $user_add = $_SESSION['address_data'];
       $user_phone = $_SESSION['user_phone'];
       $date = date('Y-m-d H:i:s');
+      $payment = $_POST['payment'];
       $pro_data = json_decode($cookie_data, true);
        foreach($pro_data as $keys => $values){
          $item = $values['item_name'];
          $quantity = $values['item_quantity'];
          $price = $values['item_price'] * $quantity;
 
-         $cql = "INSERT INTO order_history(order_number,username,item,quantity,price,address,phone,date_time,type,shipment)VALUES('$order_number','$user','$item','$quantity','$price','$user_add','$user_phone',NOW(),0,0)";
+         $cql = "INSERT INTO order_history(order_number,username,item,quantity,price,address,phone,date_time,type,shipment,payment)VALUES('$order_number','$user','$item','$quantity','$price','$user_add','$user_phone',NOW(),0,0,'$payment')";
 
          $result = mysqli_query($conn,$cql);
 
@@ -274,12 +336,30 @@ include_once("connection.php");
 
        }
         
-
+        try{
+ $soapClient = new SoapClient("https://api2.onnorokomSMS.com/sendSMS.asmx?wsdl");
+ $paramArray = array(
+ 'userName' => "01629710423",
+ 'userPassword' => "pranto224466",
+ 'mobileNumber' => "$user_phone",
+ 'smsText' => "Your Order Placed Successfully.Your Order Number is $order_number ---BuyTech",
+ 'type' => "TEXT",
+ 'maskName' => '',
+ 'campaignName' => '',
+ );
+ 
+ $value = $soapClient->__call("OneToOne", array($paramArray));
+ print_r($value->OneToOneResult);
+} 
+catch (Exception $e) {
+ print_r($e->getMessage());
+}
 
  
 }
 
 ?>
+   
 
 
 
@@ -337,7 +417,7 @@ include_once("connection.php");
        <?php
        include_once("connection.php");
        $id = $res['id'];
-      $rkm="SELECT * FROM phone WHERE id = '$id'";
+      $rkm="SELECT * FROM laptop WHERE id = '$id'";
       $rtm = mysqli_query($conn,$rkm);
       
       while ($result = mysqli_fetch_array($rtm)) { 
@@ -393,7 +473,6 @@ include_once("connection.php");
       $("#wrapper").toggleClass("toggled");
     });
   </script>
-
   </div>
 </body>
-</html>
+</html>Xiomi
