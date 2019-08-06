@@ -11,6 +11,8 @@
   <link href="css/simple-sidebar.css" rel="stylesheet">
   <link href="css/cart.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="search.css">
 <style type="text/css">
   h1{
     font-family: 'Vollkorn', serif;
@@ -20,7 +22,31 @@
    
    overflow: auto;
 }
+
 </style>
+<script>
+function showResult(str) {
+  if (str.length==0) { 
+    document.getElementById("livesearch").innerHTML="";
+    document.getElementById("livesearch").style.border="0px";
+    return;
+  }
+  if (window.XMLHttpRequest) {
+    // code for IE7+, Firefox, Chrome, Opera, Safari
+    xmlhttp=new XMLHttpRequest();
+  } else {  // code for IE6, IE5
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  xmlhttp.onreadystatechange=function() {
+    if (this.readyState==4 && this.status==200) {
+      document.getElementById("livesearch").innerHTML=this.responseText;
+      document.getElementById("livesearch").style.border="1px solid #A5ACB2";
+    }
+  }
+  xmlhttp.open("GET","getsearch.php?q="+str,true);
+  xmlhttp.send();
+}
+</script>
 </head>
 <body>
 
@@ -107,6 +133,19 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+             <form>
+
+<div class="container h-100">
+      <div class="d-flex justify-content-center h-100">
+        <div class="searchbar">
+          <input class="search_input" id="mod" type="text" size="30" name="search" onkeyup="showResult(this.value)" placeholder="Search...">
+          <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
+        </div>
+      </div>
+    </div>
+
+</form>
+      
             <li class="nav-item">
               <a class="nav-link" href="index.php">Home </a>
             </li>
@@ -202,11 +241,25 @@
         </div>
       </nav>
 
-    <style type="text/css">
+  
 
-    </style> 
-
-
+<!-- Modal -->
+<div class="modal fade" id="smodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Search Result</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="livesearch"></div>
+      </div>
+      
+    </div>
+  </div>
+</div>
 
 <div class="container-fluid" style="margin-top: 1%;">
   <h1 style="text-align: center;">Laptop</h1>
@@ -302,6 +355,8 @@
   ?>
 
 </div>
+          
+        </div>
 <br>
   <h1 style="text-align: center;">Phone</h1>
   <hr>
@@ -682,7 +737,164 @@
       $("#wrapper").toggleClass("toggled");
     });
   </script>
+  <script type="text/javascript">
+  $("#mod").keyup(function(){
+     setTimeout(function(){
+  $('#smodal').modal("show");
+   }, 1500);
+});
+</script>
 
   </div>
+ <br>
+
+  <!-- Footer -->
+<footer class="page-footer font-small blue-grey lighten-5">
+
+  <div style="background-color: #21d192;">
+    <div class="container">
+
+      <!-- Grid row-->
+      <div class="row py-4 d-flex align-items-center">
+
+        <!-- Grid column -->
+        <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
+          <h6 class="mb-0">Get connected with us on social networks!</h6>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-6 col-lg-7 text-center text-md-right">
+
+          <!-- Facebook -->
+          <a class="fb-ic">
+            <i class="fab fa-facebook-f white-text mr-4"> </i>
+          </a>
+          <!-- Twitter -->
+          <a class="tw-ic">
+            <i class="fab fa-twitter white-text mr-4"> </i>
+          </a>
+          <!-- Google +-->
+          <a class="gplus-ic">
+            <i class="fab fa-google-plus-g white-text mr-4"> </i>
+          </a>
+          <!--Linkedin -->
+          <a class="li-ic">
+            <i class="fab fa-linkedin-in white-text mr-4"> </i>
+          </a>
+          <!--Instagram-->
+          <a class="ins-ic">
+            <i class="fab fa-instagram white-text"> </i>
+          </a>
+
+        </div>
+        <!-- Grid column -->
+
+      </div>
+      <!-- Grid row-->
+
+    </div>
+  </div>
+<div style="background-color: #212E78;color: white;">
+  <!-- Footer Links -->
+  <div class="container text-center text-md-left" style="margin-top: -0.8%;">
+
+    <!-- Grid row -->
+    <div class="row mt-3 dark-grey-text">
+
+      <!-- Grid column -->
+      <div class="col-md-3 col-lg-4 col-xl-3 mb-4">
+<br><br>
+        <!-- Content -->
+        <h6 class="text-uppercase font-weight-bold">BuyTech</h6>
+        <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+        <p>We providing best e-commerce service in Bangladesh. We have one lakh mobile stock. Any time, any area you can buy our product through our website.</p>
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+
+        <!-- Links --><br><br>
+        <h6 class="text-uppercase font-weight-bold">Brnds</h6>
+        <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+        <p>
+          Apple
+        </p>
+        <p>
+          Hp
+        </p>
+        <p>
+         Dell
+        </p>
+        <p>
+          Samsung
+        </p>
+        <p>
+          Xiomi
+        </p>
+        
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+<br><br>
+        <!-- Links -->
+        <h6 class="text-uppercase font-weight-bold">Categories</h6>
+        <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+        <p>
+          Laptop
+        </p>
+        <p>
+          Phone
+        </p>
+        <p>
+          Tv
+        </p>
+        <p>
+          Tablet
+        </p>
+        <p>
+          Gaming
+        </p>
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+<br><br>
+        <!-- Links -->
+        <h6 class="text-uppercase font-weight-bold">Contact</h6>
+        <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+        <p>
+          <i class="fas fa-home mr-3"></i> Bashundhara Residential Area, &nbsp &nbsp &nbsp &nbsp &nbspDhaka, Bangladesh.</p>
+        <p>
+          <i class="fas fa-envelope mr-3"></i> abu.pranto@northsouth.edu</p>
+        <p>
+          <i class="fas fa-phone mr-3"></i> +8801629710423</p>
+        <p>
+          <i class="fas fa-print mr-3"></i> + 096100000</p>
+
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+
+  </div>
+  <!-- Footer Links -->
+</div>
+  <!-- Copyright -->
+  <div class="footer-copyright text-center text-black-50 py-3">© 2019 Copyright:
+    <a class="dark-grey-text" href="">buytech.com</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
 </body>
 </html>

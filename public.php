@@ -11,7 +11,9 @@
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="css/simple-sidebar.css" rel="stylesheet">
   <link href="css/cart.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="search.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 <style type="text/css">
   h1{
     font-family: 'Vollkorn', serif;
@@ -22,6 +24,29 @@
    overflow: auto;
 }
 </style>
+<script>
+function showResult(str) {
+  if (str.length==0) { 
+    document.getElementById("livesearch").innerHTML="";
+    document.getElementById("livesearch").style.border="0px";
+    return;
+  }
+  if (window.XMLHttpRequest) {
+    // code for IE7+, Firefox, Chrome, Opera, Safari
+    xmlhttp=new XMLHttpRequest();
+  } else {  // code for IE6, IE5
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  xmlhttp.onreadystatechange=function() {
+    if (this.readyState==4 && this.status==200) {
+      document.getElementById("livesearch").innerHTML=this.responseText;
+      document.getElementById("livesearch").style.border="1px solid #A5ACB2";
+    }
+  }
+  xmlhttp.open("GET","getsearch.php?q="+str,true);
+  xmlhttp.send();
+}
+</script>
 </head>
 <body>
 	 <?php
@@ -129,6 +154,19 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+               <form>
+
+<div class="container h-100">
+      <div class="d-flex justify-content-center h-100">
+        <div class="searchbar">
+          <input class="search_input" id="mod" type="text" size="30" name="search" onkeyup="showResult(this.value)" placeholder="Search...">
+          <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
+        </div>
+      </div>
+    </div>
+
+</form>
+      
             <li class="nav-item">
               <a class="nav-link" href="index.php">Home </a>
             </li>
@@ -332,6 +370,23 @@ catch (Exception $e) {
 }
 
 ?>
+<!-- Modal -->
+<div class="modal fade" id="smodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Search Result</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="livesearch"></div>
+      </div>
+      
+    </div>
+  </div>
+</div>
 
 <div class="container-fluid" style="margin-top: 1%;">
   <h1 style="text-align: center;">Laptop</h1>
@@ -807,7 +862,13 @@ catch (Exception $e) {
       $("#wrapper").toggleClass("toggled");
     });
   </script>
-
+<script type="text/javascript">
+  $("#mod").keyup(function(){
+     setTimeout(function(){
+  $('#smodal').modal("show");
+   }, 1500);
+});
+</script>
   </div>
 </body>
 </html>
